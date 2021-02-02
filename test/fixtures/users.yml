@@ -11,6 +11,8 @@
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  gender          :string           not null
+#  team            :string
 #
 
 # This model initially had no columns defined. If you add columns to the

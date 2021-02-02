@@ -11,6 +11,8 @@
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  gender          :string           not null
+#  team            :string
 #
 require 'test_helper'
 
