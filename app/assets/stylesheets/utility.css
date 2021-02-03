@@ -1,3 +1,4 @@
+/* Buttons */
 .blue-btn {
     border: 1px black solid;
     padding: 10px;
@@ -14,3 +15,5 @@
     background: #ffcc00;
     color: black;
 }
+
+/* Input Fields */

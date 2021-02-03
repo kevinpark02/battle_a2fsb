@@ -579,7 +579,7 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       username: "",
       gender: "",
       team: "",
-      "class": "",
+      class_of: "",
       password: "",
       errors: _this.props.errors
     };
@@ -626,22 +626,39 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       var otherLinkName = linkType === "login" ? "Have an account already? Please log in" : "Sign up for an account";
       var sessionHeading = formType === "Sign up" ? "Sign up for your account" : "Log in to Dorello";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        onSubmit: this.handleSubmit,
-        className: "session-form-cont"
+        onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "session-form"
-      }, this.renderErrors(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
-        className: "session-form-title"
-      }, sessionHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "signup-form-inputs"
+      }, this.renderErrors(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sessionHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         value: this.state.username,
         placeholder: "Enter email",
-        onChange: this.handleInput('email')
+        onChange: this.handleInput('email'),
+        className: "input-fields"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.first_name,
+        placeholder: "First Name",
+        onChange: this.handleInput('first_name'),
+        className: "input-fields"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.last_name,
+        placeholder: "Last Name",
+        onChange: this.handleInput('last_name'),
+        className: "input-fields"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.username,
+        placeholder: "Your Unique Username",
+        onChange: this.handleInput('username'),
+        className: "input-fields"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
         value: this.state.password,
         placeholder: "Enter password",
-        onChange: this.handleInput('password')
+        onChange: this.handleInput('password'),
+        className: "input-fields"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: formType,

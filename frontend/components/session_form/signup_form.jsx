@@ -11,7 +11,7 @@ class SignupForm extends React.Component {
       username: "",
       gender: "",
       team: "",
-      class: "",
+      class_of: "",
       password: "",
       errors: this.props.errors
     };
@@ -56,21 +56,41 @@ class SignupForm extends React.Component {
       const sessionHeading = formType === "Sign up" ? "Sign up for your account" : "Log in to Dorello"
 
       return(
-          <div>
-              <form onSubmit={this.handleSubmit} className="session-form-cont">
-                  <div className="session-form">
+          <div >
+              <form onSubmit={this.handleSubmit}>
+                  <div className="signup-form-inputs">
                       {this.renderErrors()}
-                        <h4 className="session-form-title">{sessionHeading}</h4>
+                        <h4>{sessionHeading}</h4>
             
                         <input type="text"
                                 value={this.state.username}
                                 placeholder="Enter email"
-                                onChange={this.handleInput('email')}/>
+                                onChange={this.handleInput('email')}
+                                className="input-fields"/>
+
+                        <input type="text"
+                                value={this.state.first_name}
+                                placeholder="First Name"
+                                onChange={this.handleInput('first_name')}
+                                className="input-fields"/>
+
+                        <input type="text"
+                                value={this.state.last_name}
+                                placeholder="Last Name"
+                                onChange={this.handleInput('last_name')}
+                                className="input-fields"/>
                     
+                        <input type="text"
+                                value={this.state.username}
+                                placeholder="Your Unique Username"
+                                onChange={this.handleInput('username')}
+                                className="input-fields"/>
+
                         <input type="password"
                                 value={this.state.password}
                                 placeholder="Enter password"
-                                onChange={this.handleInput('password')}/>
+                                onChange={this.handleInput('password')}
+                                className="input-fields"/>
                 
                         <input type="submit" value={formType} className ="btn-green"/>
 
