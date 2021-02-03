@@ -17,7 +17,7 @@
 class User < ApplicationRecord
     # VALIDATIONS - START
 
-    validates :email, :first_name, :last_name, :username, :gender, :password_digest, :session_token, presence: true
+    validates :email, :first_name, :last_name, :username, :gender, :class_of, :password_digest, :session_token, presence: true
     validates :email, uniqueness: true
     validates :username, uniqueness: true
     validates :password, length: { minimum: 8, allow_nil: true }
