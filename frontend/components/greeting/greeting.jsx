@@ -9,10 +9,10 @@ const Greeting = ({currentUser, logout}) => {
         </div>
     ) : (
         <div className="home-nav">
-            <Link to="/"><h1>Battle A2F SB</h1></Link>
+            <Link to="/"><h1>Battle a2f SB</h1></Link>
             <div className="auth-nav">
-                <Link to="/sigup">Sign Up</Link>
-                <Link to="/login">Log In</Link>
+                <li className="blue-btn"><Link to="/sigup">Sign Up</Link></li>
+                <li className="yellow-btn"><Link to="/login">Log In</Link></li>
             </div>
         </div>
     );

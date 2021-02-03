@@ -1,0 +1,13 @@
+.blue-btn {
+    border: 1px black solid;
+    padding: 10px;
+    border-radius: 10px;
+    background: #02075d;
+    color: #fff; 
+}
+
+.yellow-btn {
+    border: 1px black solid;
+    padding: 10px;
+    border-radius: 10px;
+}

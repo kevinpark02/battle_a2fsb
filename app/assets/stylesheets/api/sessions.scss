@@ -5,4 +5,16 @@
 .home-nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    border: 1px black solid;
+    padding: 10px 30px;
+}
+
+.auth-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.auth-nav li:first-child {
+    margin-right: 30px;
 }
