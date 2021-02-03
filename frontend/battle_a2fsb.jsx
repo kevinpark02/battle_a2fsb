@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-import configureStore from './store/store'
+import Root from './components/root';
+import configureStore from './store/store';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
@@ -12,5 +12,5 @@ document.addEventListener("DOMContentLoaded", () => {
   window.dispatch = store.dispatch;
   // TESTING - END
 
-  ReactDOM.render(<h1>Battle a2f SB</h1>, root);
+  ReactDOM.render(<Root store={store}/>, root);
 });
