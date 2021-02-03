@@ -8,6 +8,21 @@
     align-items: center;
     border: 1px black solid;
     padding: 10px 30px;
+    // background-image: linear-gradient(to bottom right, #0079bf, #fbec5d)
+    background: #0079bf;
+}
+
+.left-nav {
+    display: flex;
+    align-items: center;
+}
+
+.left-nav h1 {
+    margin-right: 20px;
+}
+
+.left-nav img:first-of-type {
+    margin-right: 20px;
 }
 
 .auth-nav {
@@ -17,4 +32,15 @@
 
 .auth-nav li:first-child {
     margin-right: 30px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.title-nav {
+    color: #fff;
+    font-family: 'Pacifico', cursive;
 }

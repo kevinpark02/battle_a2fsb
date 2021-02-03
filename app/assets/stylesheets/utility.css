@@ -2,12 +2,15 @@
     border: 1px black solid;
     padding: 10px;
     border-radius: 10px;
-    background: #02075d;
-    color: #fff; 
+    background: #fff;
+    color: #0066cc;
+    box-shadow: inset; 
 }
 
 .yellow-btn {
     border: 1px black solid;
     padding: 10px;
     border-radius: 10px;
+    background: #ffcc00;
+    color: black;
 }

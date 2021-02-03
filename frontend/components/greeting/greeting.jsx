@@ -9,9 +9,13 @@ const Greeting = ({currentUser, logout}) => {
         </div>
     ) : (
         <div className="home-nav">
-            <Link to="/"><h1>Battle a2f SB</h1></Link>
+            <div className="left-nav">
+                <Link to="/"><h1 className="title-nav">Battle Santa Barbara</h1></Link>
+                <img className="logo" src={window.ucsblogo} alt="ucsblogo"/>
+                <img className="logo" src={window.westmontlogo} alt="westmontlogo"/>
+            </div>
             <div className="auth-nav">
-                <li className="blue-btn"><Link to="/sigup">Sign Up</Link></li>
+                <li className="blue-btn"><Link to="/signup">Sign Up</Link></li>
                 <li className="yellow-btn"><Link to="/login">Log In</Link></li>
             </div>
         </div>
