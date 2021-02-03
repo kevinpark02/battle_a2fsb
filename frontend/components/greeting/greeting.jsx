@@ -8,9 +8,12 @@ const Greeting = ({currentUser, logout}) => {
             <button onClick={logout}>Log Out</button>
         </div>
     ) : (
-        <div>
-            <Link to="/sigup">Sign Up</Link>
-            <Link to="/login">Log In</Link>
+        <div className="home-nav">
+            <Link to="/"><h1>Battle A2F SB</h1></Link>
+            <div className="auth-nav">
+                <Link to="/sigup">Sign Up</Link>
+                <Link to="/login">Log In</Link>
+            </div>
         </div>
     );
 
