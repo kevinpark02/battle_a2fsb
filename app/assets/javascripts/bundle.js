@@ -625,7 +625,9 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       var linkType = formType === "Sign up" ? "login" : "signup";
       var otherLinkName = linkType === "login" ? "Have an account already? Please log in" : "Sign up for an account";
       var sessionHeading = formType === "Sign up" ? "Sign up for your account" : "Log in to Dorello";
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "signup-form-inputs"

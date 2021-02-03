@@ -56,7 +56,7 @@ class SignupForm extends React.Component {
       const sessionHeading = formType === "Sign up" ? "Sign up for your account" : "Log in to Dorello"
 
       return(
-          <div >
+          <div className="signup-form">
               <form onSubmit={this.handleSubmit}>
                   <div className="signup-form-inputs">
                       {this.renderErrors()}
