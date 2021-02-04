@@ -433,7 +433,9 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
     key: "renderErrors",
     value: function renderErrors() {
       var errors = this.props.errors;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, errors.map(function (error, i) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "session-errors"
+      }, errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: i
         }, error);
@@ -446,27 +448,28 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
       var linkType = formType === "Sign up" ? "login" : "signup";
       var otherLinkName = linkType === "login" ? "Have an account already? Please log in" : "Sign up for an account";
       var sessionHeading = formType === "Sign up" ? "Sign up for your account" : "Log in to Dorello";
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        onSubmit: this.handleSubmit,
-        className: "session-form-cont"
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "session-form"
-      }, this.renderErrors(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
-        className: "session-form-title"
-      }, sessionHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "signup-form-inputs"
+      }, this.renderErrors(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sessionHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        value: this.state.username,
+        value: this.state.email,
         placeholder: "Enter email",
-        onChange: this.handleInput('email')
+        onChange: this.handleInput('email'),
+        className: "input-fields"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
         value: this.state.password,
         placeholder: "Enter password",
-        onChange: this.handleInput('password')
+        onChange: this.handleInput('password'),
+        className: "input-fields"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: formType,
-        className: "btn-green"
+        className: "yellow-btn sign-up-form-btn"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         className: "session-form-alt",
         to: "/".concat(linkType)
@@ -612,7 +615,9 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
     key: "renderErrors",
     value: function renderErrors() {
       var errors = this.props.errors;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, errors.map(function (error, i) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "session-errors"
+      }, errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: i
         }, error);
@@ -633,9 +638,15 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
         className: "signup-form-inputs"
       }, this.renderErrors(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sessionHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        value: this.state.username,
+        value: this.state.email,
         placeholder: "Enter email",
         onChange: this.handleInput('email'),
+        className: "input-fields"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "password",
+        value: this.state.password,
+        placeholder: "Enter password",
+        onChange: this.handleInput('password'),
         className: "input-fields"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
@@ -656,15 +667,26 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleInput('username'),
         className: "input-fields"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "password",
-        value: this.state.password,
-        placeholder: "Enter password",
-        onChange: this.handleInput('password'),
+        type: "text",
+        value: this.state.class_of,
+        placeholder: "Graduating Year (ex. 2014)",
+        onChange: this.handleInput('class_of'),
         className: "input-fields"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "gender-options"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        onChange: this.handleInput('gender')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        selected: true,
+        disabled: true
+      }, "Please select"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "Bro"
+      }, "Bro"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "Sis"
+      }, "Sis"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: formType,
-        className: "btn-green"
+        className: "yellow-btn sign-up-form-btn"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         className: "session-form-alt",
         to: "/".concat(linkType)

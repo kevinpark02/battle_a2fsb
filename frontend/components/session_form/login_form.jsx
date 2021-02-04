@@ -33,7 +33,7 @@ class LoginForm extends React.Component {
       const errors = this.props.errors;
 
       return(
-            <ul>
+            <ul className="session-errors">
                 {errors.map((error, i) => (
                     <li key={i}>
                         {error}
@@ -50,23 +50,25 @@ class LoginForm extends React.Component {
       const sessionHeading = formType === "Sign up" ? "Sign up for your account" : "Log in to Dorello"
 
       return(
-          <div>
-              <form onSubmit={this.handleSubmit} className="session-form-cont">
-                  <div className="session-form">
+          <div className="signup-form">
+              <form onSubmit={this.handleSubmit}>
+                  <div className="signup-form-inputs">
                       {this.renderErrors()}
-                        <h4 className="session-form-title">{sessionHeading}</h4>
+                        <h4>{sessionHeading}</h4>
             
                         <input type="text"
-                                value={this.state.username}
+                                value={this.state.email}
                                 placeholder="Enter email"
-                                onChange={this.handleInput('email')}/>
-                    
+                                onChange={this.handleInput('email')}
+                                className="input-fields"/>
+
                         <input type="password"
                                 value={this.state.password}
                                 placeholder="Enter password"
-                                onChange={this.handleInput('password')}/>
+                                onChange={this.handleInput('password')}
+                                className="input-fields"/>
                 
-                        <input type="submit" value={formType} className ="btn-green"/>
+                        <input type="submit" value={formType} className ="yellow-btn sign-up-form-btn"/>
 
                         <Link className="session-form-alt" to={`/${linkType}`}>{otherLinkName}</Link>
                   </div>

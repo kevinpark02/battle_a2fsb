@@ -39,7 +39,7 @@ class SignupForm extends React.Component {
       const errors = this.props.errors;
 
       return(
-            <ul>
+            <ul className="session-errors">
                 {errors.map((error, i) => (
                     <li key={i}>
                         {error}
@@ -63,9 +63,15 @@ class SignupForm extends React.Component {
                         <h4>{sessionHeading}</h4>
             
                         <input type="text"
-                                value={this.state.username}
+                                value={this.state.email}
                                 placeholder="Enter email"
                                 onChange={this.handleInput('email')}
+                                className="input-fields"/>
+
+                        <input type="password"
+                                value={this.state.password}
+                                placeholder="Enter password"
+                                onChange={this.handleInput('password')}
                                 className="input-fields"/>
 
                         <input type="text"
@@ -79,20 +85,31 @@ class SignupForm extends React.Component {
                                 placeholder="Last Name"
                                 onChange={this.handleInput('last_name')}
                                 className="input-fields"/>
-                    
+
                         <input type="text"
                                 value={this.state.username}
                                 placeholder="Your Unique Username"
                                 onChange={this.handleInput('username')}
                                 className="input-fields"/>
 
-                        <input type="password"
-                                value={this.state.password}
-                                placeholder="Enter password"
-                                onChange={this.handleInput('password')}
-                                className="input-fields"/>
+
+                        <input type="text"
+                               value={this.state.class_of}
+                               placeholder="Graduating Year (ex. 2014)"
+                               onChange={this.handleInput('class_of')}
+                               className="input-fields"/>
+
+                        <div className="gender-options">
+                            <select onChange={this.handleInput('gender')}>
+                                <option selected disabled>
+                                Please select
+                                </option>
+                                <option value="Bro">Bro</option>
+                                <option value="Sis">Sis</option>
+                            </select>
+                        </div>
                 
-                        <input type="submit" value={formType} className ="btn-green"/>
+                        <input type="submit" value={formType} className ="yellow-btn sign-up-form-btn"/>
 
                         <Link className="session-form-alt" to={`/${linkType}`}>{otherLinkName}</Link>
                   </div>

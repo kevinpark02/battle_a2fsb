@@ -5,7 +5,8 @@
     border-radius: 10px;
     background: #fff;
     color: #0066cc;
-    box-shadow: inset; 
+    box-shadow: inset;
+    cursor: pointer; 
 }
 
 .yellow-btn {
@@ -14,6 +15,24 @@
     border-radius: 10px;
     background: #ffcc00;
     color: black;
+    cursor: pointer;
 }
 
 /* Input Fields */
+
+input[type="text"] {
+    width: 60%;
+    font-size: 17px;
+    padding: 0 5px;
+}
+
+input[type="password"] {
+    width: 60%;
+    font-size: 17px;
+    padding: 0 5px;
+}
+ 
+.gender-options select {
+    width: 100%;
+    font-size: 17px;
+}
