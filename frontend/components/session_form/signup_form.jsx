@@ -53,7 +53,7 @@ class SignupForm extends React.Component {
       const formType = this.props.formType;
       const linkType = formType === "Sign up" ? "login" : "signup"
       const otherLinkName = linkType === "login" ? "Have an account already? Please log in" : "Sign up for an account"
-      const sessionHeading = formType === "Sign up" ? "Sign up for your account" : "Log in to Dorello"
+      const sessionHeading = formType === "Sign up" ? "Sign up for your account" : "Enter into Battle Santa Barbara"
 
       return(
           <div className="signup-form">
