@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom';
 
 const Greeting = ({currentUser, logout}) => {
     const greeting = currentUser ? (
-        <div>
-            <p>Hello, {currentUser.email}</p>
-            <button onClick={logout}>Log Out</button>
+        <div className="logged-nav">
+            <div className="logged-left">
+                <div className="blue-btn"><Link to="/home">Home</Link></div>
+                <div className="blue-btn"><Link to="/profile">Profile</Link></div>
+            </div>
+            <div className="logged-middle">
+                <p>Welcome to the Battle Ground</p>
+            </div>
+            <div className="logged-right">
+                <p>Hello, {currentUser.username}</p>
+                <div onClick={logout} className="yellow-btn">Log Out</div>
+            </div>
         </div>
     ) : (
         <div className="home-nav">

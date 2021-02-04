@@ -45,12 +45,46 @@
     font-family: 'Pacifico', cursive;
 }
 
+// Logged Nav
+
+.logged-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0079bf;
+    border: 1px black solid;
+    padding: 10px 0;
+}
+
+.logged-left {
+    display: flex;
+    margin-left: 20px;
+}
+
+.logged-left div:first-child {
+    margin-right: 20px;
+}
+
+.logged-middle {
+    color: #fff;
+}
+
+.logged-right {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.logged-right p {
+    margin-right: 20px;
+    color: #fff;
+}
+
 // Session Form General
 
 .session-form-alt {
     color: blue;
 }
-
 
 // Signup Form
 .signup-form {
