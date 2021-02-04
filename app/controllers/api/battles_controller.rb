@@ -20,4 +20,11 @@ class Api::BattlesController < ApplicationController
             render json: @battle.errors.full_messages, status: 422
         end
     end
+
+    private
+
+    def battle_params
+        params[:battle][:participant_ids] = [] if params[:battle][:participant_ids] == nil
+        params.require(:battle).permit(:name, :participant_ids: [])
+    end
 end
