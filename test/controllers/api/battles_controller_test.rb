@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BattlesControllerTest < ActionDispatch::IntegrationTest
+class Api::BattlesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

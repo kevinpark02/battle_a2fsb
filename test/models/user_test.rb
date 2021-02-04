@@ -13,6 +13,8 @@
 #  updated_at      :datetime         not null
 #  gender          :string           not null
 #  team            :string
+#  class_of        :string           not null
+#  points          :integer
 #
 require 'test_helper'
 
