@@ -3,6 +3,10 @@ import {
   LOGOUT_CURRENT_USER,
 } from "../actions/session_actions";
 
+import {
+  RECEIVE_ALL_USERS
+} from "../actions/user_actions";
+
 const usersReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
@@ -12,6 +16,8 @@ const usersReducer = (state = {}, action) => {
       });
     case LOGOUT_CURRENT_USER:
       return {};
+    case RECEIVE_ALL_USERS:
+      return action.users
     default:
       return state;
   }

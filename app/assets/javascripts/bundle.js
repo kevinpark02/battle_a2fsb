@@ -158,6 +158,38 @@ var signup = function signup(user) {
 
 /***/ }),
 
+/***/ "./frontend/actions/user_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/user_actions.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_ALL_USERS": () => (/* binding */ RECEIVE_ALL_USERS),
+/* harmony export */   "receiveAllUsers": () => (/* binding */ receiveAllUsers),
+/* harmony export */   "fetchUsers": () => (/* binding */ fetchUsers)
+/* harmony export */ });
+/* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_api_util */ "./frontend/util/user_api_util.js");
+
+var RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
+var receiveAllUsers = function receiveAllUsers(users) {
+  return {
+    type: RECEIVE_ALL_USERS,
+    users: users
+  };
+};
+var fetchUsers = function fetchUsers() {
+  return function (dispatch) {
+    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchUsers().then(function (users) {
+      return dispatch(receiveAllUsers(users));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/battle_a2fsb.jsx":
 /*!***********************************!*\
   !*** ./frontend/battle_a2fsb.jsx ***!
@@ -939,7 +971,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -954,6 +988,9 @@ var usersReducer = function usersReducer() {
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.LOGOUT_CURRENT_USER:
       return {};
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_ALL_USERS:
+      return action.users;
 
     default:
       return state;
@@ -1091,6 +1128,26 @@ var logout = function logout() {
   return $.ajax({
     url: "/api/session",
     method: "DELETE"
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/user_api_util.js":
+/*!****************************************!*\
+  !*** ./frontend/util/user_api_util.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchUsers": () => (/* binding */ fetchUsers)
+/* harmony export */ });
+var fetchUsers = function fetchUsers() {
+  return $.ajax({
+    url: "/api/users",
+    method: "GET"
   });
 };
 
