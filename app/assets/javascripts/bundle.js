@@ -79,6 +79,38 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 /***/ }),
 
+/***/ "./frontend/actions/battle_actions.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/battle_actions.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_ALL_BATTLES": () => (/* binding */ RECEIVE_ALL_BATTLES),
+/* harmony export */   "receiveAllBattles": () => (/* binding */ receiveAllBattles),
+/* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles)
+/* harmony export */ });
+/* harmony import */ var _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/battle_api_util */ "./frontend/util/battle_api_util.js");
+
+var RECEIVE_ALL_BATTLES = "RECEIVE_ALL_BATTLES";
+var receiveAllBattles = function receiveAllBattles(battles) {
+  return {
+    type: RECEIVE_ALL_BATTLES,
+    battles: battles
+  };
+};
+var fetchBattles = function fetchBattles() {
+  return function (dispatch) {
+    return _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchBattles().then(function (battles) {
+      return dispatch(receiveAllBattles(battles));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -929,6 +961,38 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/reducers/battle_reducer.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/battle_reducer.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/battle_actions */ "./frontend/actions/battle_actions.js");
+
+
+var battleReducer = function battleReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_BATTLES:
+      return action.battles;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (battleReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -940,12 +1004,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _battle_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./battle_reducer */ "./frontend/reducers/battle_reducer.js");
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  battles: _battle_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1148,6 +1215,26 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/battle_api_util.js":
+/*!******************************************!*\
+  !*** ./frontend/util/battle_api_util.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles)
+/* harmony export */ });
+var fetchBattles = function fetchBattles() {
+  return $.ajax({
+    url: "/api/battles",
+    method: "GET"
+  });
+};
 
 /***/ }),
 
