@@ -1,0 +1,1 @@
+json.extract! battle, :id, :name, :participant_ids

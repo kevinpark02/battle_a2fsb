@@ -1,6 +1,9 @@
 class Api::BattlesController < ApplicationController
+    before_action :require_logged_in, only: [:index, :show, :create, :update]
+    
     def index
         @battles = Battle.all
+        render :index
     end
 
     def show
