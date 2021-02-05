@@ -12,6 +12,12 @@ class Api::BattlesController < ApplicationController
 
     def create
         @battle = Battle.new(battle_params)
+
+        if @battle.save
+            render :show
+        else
+            render json: @battle.errors.full_messages, status: 422
+        end
     end
 
     def update
