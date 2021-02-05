@@ -9,5 +9,11 @@
 User.delete_all
 
 # User seed
-    u1 = User.create(email: 'kevin.park02@gmail.com', first_name: "Kevin", last_name: "Park", username: "kpark02", gender: "Male", class_of: "2014", password: "battlesb1")
-    u2 = User.create(email: 'carol.h.yang@gmail.com', first_name: "Carol", last_name: "Park", username: "cp629", gender: "Female", class_of: "2013", password: "battlesb2")
+    u1 = User.create(email: 'test@gmail.com', first_name: "Test", last_name: "Tester", username: "mctest", gender: "Bro", class_of: "1991", password: "battlesb1")
+    u2 = User.create(email: 'carol.h.yang@gmail.com', first_name: "Carol", last_name: "Park", username: "cp629", gender: "Sis", class_of: "2013", password: "battlesb2")
+
+# Battle seed
+    b1 = Battle.create(name: "Fresh Start")
+    b2 = Battle.create(name: "Fresh Wind")
+    b3 = Battle.create(name: "Fresh Fire")
+    b4 = Battle.create(name: "Fresh Water")
