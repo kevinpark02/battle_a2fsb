@@ -12,7 +12,7 @@ const App = () => (
     <header>
       <GreetingContainer />
     </header>
-    <aside>
+    <aside className="battle-sidebar">
       <BattleSideBarContainer />
     </aside>
 
