@@ -34,6 +34,6 @@ class Api::BattlesController < ApplicationController
 
     def battle_params
         params[:battle][:participant_ids] = [] if params[:battle][:participant_ids] == nil
-        params.require(:battle).permit(:name, :participant_ids: [])
+        params.require(:battle).permit(:name, participant_ids: [])
     end
 end

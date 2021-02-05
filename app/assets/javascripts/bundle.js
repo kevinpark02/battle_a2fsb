@@ -393,19 +393,12 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     users: state.entities.users,
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    battles: state.entities.battles
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchUsers: function fetchUsers() {
-      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__.fetchUsers)());
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_battle_sidebar__WEBPACK_IMPORTED_MODULE_0__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, null)(_battle_sidebar__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 
@@ -633,6 +626,8 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
         return _this3.props.fetchUsers();
+      }).then(function () {
+        return _this3.props.fetchBattles();
       });
     }
   }, {
@@ -705,6 +700,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _login_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./login_form */ "./frontend/components/session_form/login_form.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_battle_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/battle_actions */ "./frontend/actions/battle_actions.js");
+
 
 
 
@@ -727,6 +724,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers() {
       return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__.fetchUsers)());
+    },
+    fetchBattles: function fetchBattles() {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_4__.fetchBattles)());
     }
   };
 };
@@ -824,6 +824,8 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
         return _this3.props.fetchUsers();
+      }).then(function () {
+        return _this3.props.fetchBattles();
       });
     }
   }, {
@@ -931,6 +933,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _signup_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./signup_form */ "./frontend/components/session_form/signup_form.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_battle_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/battle_actions */ "./frontend/actions/battle_actions.js");
+
 
 
 
@@ -953,6 +957,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers() {
       return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__.fetchUsers)());
+    },
+    fetchBattles: function fetchBattles() {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_4__.fetchBattles)());
     }
   };
 };

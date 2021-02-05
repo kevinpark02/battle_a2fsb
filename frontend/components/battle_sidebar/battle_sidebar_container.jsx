@@ -6,14 +6,9 @@ import { withRouter } from 'react-router';
 const mapStateToProps = (state) => {
     return({
         users: state.entities.users,
-        currentUser: state.entities.users[state.session.id]
+        currentUser: state.entities.users[state.session.id],
+        battles: state.entities.battles
     })
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return({
-        fetchUsers: () => dispatch(fetchUsers())
-    })
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BattleSideBar);
+export default connect(mapStateToProps, null)(BattleSideBar);
