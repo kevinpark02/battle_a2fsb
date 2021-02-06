@@ -12,28 +12,39 @@ class BattleSideBar extends React.Component {
     }
 
     render() {
+        // debugger
         if (this.props.battles === undefined) {
             return null
         }
 
         const battles = this.props.battles;
+        const currentUser = this.props.currentUser;
 
-        const sidebar = this.props.currentUser ? 
-            <ul className="battle-sidebar-list">
-                    {battles.map(battle => {
-                        return(
-                            <BattleIndexItem battle={battle}
-                                             key={battle.id}
-                                             />
-                        )
-                    })}
-            </ul>
+        const availBattles = currentUser ? 
+            <div className="avail-battle-container">
+                <h2>Your Battles!</h2>
+                <ul className="battle-sidebar-list">
+                        {battles.map(battle => {
+                            if (battle.participant_ids.includes(currentUser.id)) {
+                                return(
+                                    <BattleIndexItem battle={battle}
+                                                    key={battle.id}
+                                                    />
+
+                                )
+                            }
+                        })}
+                </ul>
+            </div>
             : 
             null
+        
+
 
         return(
             <div>
-                {sidebar}
+                <h1 className="sidebar-title">Battles</h1>
+                {availBattles}
             </div>
         )
     }

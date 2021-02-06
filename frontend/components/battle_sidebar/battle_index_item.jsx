@@ -8,7 +8,7 @@ class BattleIndexItem extends React.Component {
 
     render() {
         return(
-            <li className="battle-list">{this.props.battle.name}</li>
+            <li className="battle-list"># {this.props.battle.name}</li>
         )
     }
 }

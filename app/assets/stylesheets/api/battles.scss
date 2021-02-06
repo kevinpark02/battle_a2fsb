@@ -5,9 +5,23 @@
 .battle-sidebar {
     border: 1px black solid;
     width: 20%;
+    height: 100vh;
+    background: rgb(25, 23, 29);
+}
+
+.sidebar-title {
+    color: rgb(154,154,157);
+    padding-left: 20px;
 }
 
 .battle-sidebar-list {
     display: flex;
     flex-direction: column;
+    padding-left: 20px;
+    color: rgb(154,154,157);
+}
+
+.avail-battle-container {
+    padding-left: 20px;
+    color: rgb(154,154,157);
 }
