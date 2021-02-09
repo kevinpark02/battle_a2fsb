@@ -31,6 +31,7 @@ class BattleSideBar extends React.Component {
                                     <BattleIndexItem battle={battle}
                                                     key={battle.id}
                                                     updateBattle={updateBattle}
+                                                    currentUser={currentUser}
                                                     />
 
                                 )
@@ -51,6 +52,7 @@ class BattleSideBar extends React.Component {
                                     <BattleIndexItem battle={battle}
                                                     key={battle.id}
                                                     updateBattle={updateBattle}
+                                                    currentUser={currentUser}
                                                     />
 
                                 )

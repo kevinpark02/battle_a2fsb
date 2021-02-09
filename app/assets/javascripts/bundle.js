@@ -343,6 +343,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -386,6 +388,7 @@ var BattleIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "handleJoin",
     value: function handleJoin(e) {
       e.preventDefault();
+      var participantIds = this.setState(_defineProperty({}, "participant_ids", this.state.participant_ids.push(this.props.currentUser.id)));
     }
   }, {
     key: "render",
@@ -395,7 +398,8 @@ var BattleIndexItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "battle-name"
       }, "# \xA0 \xA0 ", this.props.battle.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "blue-btn-small"
+        className: "blue-btn-small",
+        onClick: this.handleJoin
       }, "Join"));
     }
   }]);
@@ -482,7 +486,8 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_battle_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
             battle: battle,
             key: battle.id,
-            updateBattle: updateBattle
+            updateBattle: updateBattle,
+            currentUser: currentUser
           });
         }
       }))) : null;
@@ -495,7 +500,8 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_battle_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
             battle: battle,
             key: battle.id,
-            updateBattle: updateBattle
+            updateBattle: updateBattle,
+            currentUser: currentUser
           });
         }
       }))) : null;
