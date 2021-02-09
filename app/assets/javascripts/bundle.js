@@ -1122,10 +1122,15 @@ var battleReducer = function battleReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
+  var nextState = Object.assign({}, state);
 
   switch (action.type) {
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_BATTLES:
       return action.battles;
+
+    case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BATTLE:
+      nextState[action.battle.id] = action.battle;
+      return nextState;
 
     default:
       return state;

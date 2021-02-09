@@ -1,6 +1,6 @@
 import BattleSideBar from './battle_sidebar'
 import { connect } from 'react-redux';
-import { fetchBattles } from '../../actions/battle_actions';
+import { fetchBattles, updateBattle } from '../../actions/battle_actions';
 import { fetchUsers } from '../../actions/user_actions';
 import { withRouter } from 'react-router';
 
