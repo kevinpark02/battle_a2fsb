@@ -19,6 +19,7 @@ class BattleSideBar extends React.Component {
 
         const battles = this.props.battles;
         const currentUser = this.props.currentUser;
+        const updateBattle = this.props.updateBattle
 
         const yourBattles = currentUser ? 
             <div className="battle-container">
@@ -29,6 +30,7 @@ class BattleSideBar extends React.Component {
                                 return(
                                     <BattleIndexItem battle={battle}
                                                     key={battle.id}
+                                                    updateBattle={updateBattle}
                                                     />
 
                                 )
@@ -48,6 +50,7 @@ class BattleSideBar extends React.Component {
                                 return(
                                     <BattleIndexItem battle={battle}
                                                     key={battle.id}
+                                                    updateBattle={updateBattle}
                                                     />
 
                                 )
@@ -59,8 +62,7 @@ class BattleSideBar extends React.Component {
             null
         
         return(
-            <div>
-                <h1 className="sidebar-title">Battles</h1>
+            <div className="battle-sidebar-outer-container">
                 {yourBattles}
                 {availBattles}
             </div>

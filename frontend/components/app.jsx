@@ -5,19 +5,19 @@ import SignupFormContainer from "./session_form/signup_form_container";
 import BattleSideBarContainer from "./battle_sidebar/battle_sidebar_container";
 
 import { Route } from 'react-router-dom';
-import { AuthRoute } from '../util/route_util';
+import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 const App = () => (
   <div>
     <header>
       <GreetingContainer />
     </header>
-    <aside className="battle-sidebar">
-      <BattleSideBarContainer />
-    </aside>
 
     <AuthRoute path="/login" component={LoginFormContainer} />
     <AuthRoute path="/signup" component={SignupFormContainer} />
+    {/* <aside className="battle-sidebar"> */}
+      <ProtectedRoute path="/home" component={BattleSideBarContainer}/>
+    {/* </aside> */}
   </div>
 );
 

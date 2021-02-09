@@ -313,14 +313,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("aside", {
-    className: "battle-sidebar"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_battle_sidebar_battle_sidebar_container__WEBPACK_IMPORTED_MODULE_4__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_2__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_3__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.ProtectedRoute, {
+    path: "/home",
+    component: _battle_sidebar_battle_sidebar_container__WEBPACK_IMPORTED_MODULE_4__.default
   }));
 };
 
@@ -371,17 +372,31 @@ var BattleIndexItem = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(BattleIndexItem);
 
   function BattleIndexItem(props) {
+    var _this;
+
     _classCallCheck(this, BattleIndexItem);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = _this.props.battle;
+    _this.handleJoin = _this.handleJoin.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(BattleIndexItem, [{
+    key: "handleJoin",
+    value: function handleJoin(e) {
+      e.preventDefault();
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battle-item"
-      }, "# \xA0 \xA0 ", this.props.battle.name);
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "battle-name"
+      }, "# \xA0 \xA0 ", this.props.battle.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "blue-btn-small"
+      }, "Join"));
     }
   }]);
 
@@ -457,6 +472,7 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
 
       var battles = this.props.battles;
       var currentUser = this.props.currentUser;
+      var updateBattle = this.props.updateBattle;
       var yourBattles = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battle-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Battles!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
@@ -465,7 +481,8 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
         if (battle.participant_ids.includes(currentUser.id)) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_battle_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
             battle: battle,
-            key: battle.id
+            key: battle.id,
+            updateBattle: updateBattle
           });
         }
       }))) : null;
@@ -477,13 +494,14 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
         if (!battle.participant_ids.includes(currentUser.id)) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_battle_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
             battle: battle,
-            key: battle.id
+            key: battle.id,
+            updateBattle: updateBattle
           });
         }
       }))) : null;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-        className: "sidebar-title"
-      }, "Battles"), yourBattles, availBattles);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "battle-sidebar-outer-container"
+      }, yourBattles, availBattles);
     }
   }]);
 
@@ -530,6 +548,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers() {
       return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__.fetchUsers)());
+    },
+    updateBattle: function updateBattle(battle) {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_2__.updateBattle)(battle));
     }
   };
 };

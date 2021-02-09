@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.battle-sidebar {
+.battle-sidebar-outer-container {
     border: 1px black solid;
     width: 20%;
     height: 100vh;
@@ -30,4 +30,12 @@
 .battle-container h2 {
     font-size: 18px;
     margin-bottom: 10px;
+}
+
+.battle-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-right: 20px;
 }
