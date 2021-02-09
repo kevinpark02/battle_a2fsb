@@ -440,7 +440,7 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
 
       var battles = this.props.battles;
       var currentUser = this.props.currentUser;
-      var availBattles = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      var yourBattles = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "avail-battle-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Battles!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "battle-sidebar-list"
@@ -452,9 +452,21 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
           });
         }
       }))) : null;
+      var availBattles = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "avail-battle-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Available Battles!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "battle-sidebar-list"
+      }, battles.map(function (battle) {
+        if (!battle.participant_ids.includes(currentUser.id)) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_battle_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+            battle: battle,
+            key: battle.id
+          });
+        }
+      }))) : null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: "sidebar-title"
-      }, "Battles"), availBattles);
+      }, "Battles"), yourBattles, availBattles);
     }
   }]);
 
