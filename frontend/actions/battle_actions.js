@@ -9,11 +9,16 @@ export const receiveAllBattles = (battles) => ({
 });
 
 export const receiveBattle = (battle) => ({
-    type: RECEIVE_ALL_BATTLES,
+    type: RECEIVE_BATTLE,
     battle
 })
 
 export const fetchBattles = () => dispatch => {
     return BattleApiUtil.fetchBattles()
         .then(battles => dispatch(receiveAllBattles(battles)))
+};
+
+export const updateBattle = (battle) => dispatch => {
+    return BattleApiUtil.updateBattle(battle)
+        .then(battle =>  dispatch(receiveBattle(battle)))
 };

@@ -92,7 +92,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_BATTLE": () => (/* binding */ RECEIVE_BATTLE),
 /* harmony export */   "receiveAllBattles": () => (/* binding */ receiveAllBattles),
 /* harmony export */   "receiveBattle": () => (/* binding */ receiveBattle),
-/* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles)
+/* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles),
+/* harmony export */   "updateBattle": () => (/* binding */ updateBattle)
 /* harmony export */ });
 /* harmony import */ var _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/battle_api_util */ "./frontend/util/battle_api_util.js");
 
@@ -106,7 +107,7 @@ var receiveAllBattles = function receiveAllBattles(battles) {
 };
 var receiveBattle = function receiveBattle(battle) {
   return {
-    type: RECEIVE_ALL_BATTLES,
+    type: RECEIVE_BATTLE,
     battle: battle
   };
 };
@@ -114,6 +115,13 @@ var fetchBattles = function fetchBattles() {
   return function (dispatch) {
     return _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchBattles().then(function (battles) {
       return dispatch(receiveAllBattles(battles));
+    });
+  };
+};
+var updateBattle = function updateBattle(battle) {
+  return function (dispatch) {
+    return _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__.updateBattle(battle).then(function (battle) {
+      return dispatch(receiveBattle(battle));
     });
   };
 };
