@@ -89,16 +89,25 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_ALL_BATTLES": () => (/* binding */ RECEIVE_ALL_BATTLES),
+/* harmony export */   "RECEIVE_BATTLE": () => (/* binding */ RECEIVE_BATTLE),
 /* harmony export */   "receiveAllBattles": () => (/* binding */ receiveAllBattles),
+/* harmony export */   "receiveBattle": () => (/* binding */ receiveBattle),
 /* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles)
 /* harmony export */ });
 /* harmony import */ var _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/battle_api_util */ "./frontend/util/battle_api_util.js");
 
 var RECEIVE_ALL_BATTLES = "RECEIVE_ALL_BATTLES";
+var RECEIVE_BATTLE = "RECEIVE_BATTLE";
 var receiveAllBattles = function receiveAllBattles(battles) {
   return {
     type: RECEIVE_ALL_BATTLES,
     battles: battles
+  };
+};
+var receiveBattle = function receiveBattle(battle) {
+  return {
+    type: RECEIVE_ALL_BATTLES,
+    battle: battle
   };
 };
 var fetchBattles = function fetchBattles() {
@@ -1353,12 +1362,22 @@ var configureStore = function configureStore() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles)
+/* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles),
+/* harmony export */   "updateBattle": () => (/* binding */ updateBattle)
 /* harmony export */ });
 var fetchBattles = function fetchBattles() {
   return $.ajax({
     url: "/api/battles",
     method: "GET"
+  });
+};
+var updateBattle = function updateBattle(battle) {
+  return $.ajax({
+    url: "/api/lists/".concat(battle.id),
+    method: "PATCH",
+    data: {
+      battle: battle
+    }
   });
 };
 
