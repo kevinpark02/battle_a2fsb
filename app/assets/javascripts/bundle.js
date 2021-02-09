@@ -363,8 +363,8 @@ var BattleIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        className: "battle-list"
-      }, "# ", this.props.battle.name);
+        className: "battle-item"
+      }, "# \xA0 \xA0 ", this.props.battle.name);
     }
   }]);
 
@@ -441,7 +441,7 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
       var battles = this.props.battles;
       var currentUser = this.props.currentUser;
       var yourBattles = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "avail-battle-container"
+        className: "battle-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Battles!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "battle-sidebar-list"
       }, battles.map(function (battle) {
@@ -453,7 +453,7 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
         }
       }))) : null;
       var availBattles = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "avail-battle-container"
+        className: "battle-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Available Battles!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "battle-sidebar-list"
       }, battles.map(function (battle) {

@@ -17,11 +17,15 @@
 .battle-sidebar-list {
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
     color: rgb(154,154,157);
 }
 
-.avail-battle-container {
+.battle-container {
     padding-left: 20px;
     color: rgb(154,154,157);
+    margin-bottom: 20px;
+}
+
+.battle-container h2 {
+    font-size: 18px;
 }

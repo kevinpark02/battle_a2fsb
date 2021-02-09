@@ -21,7 +21,7 @@ class BattleSideBar extends React.Component {
         const currentUser = this.props.currentUser;
 
         const yourBattles = currentUser ? 
-            <div className="avail-battle-container">
+            <div className="battle-container">
                 <h2>Your Battles!</h2>
                 <ul className="battle-sidebar-list">
                         {battles.map(battle => {
@@ -40,7 +40,7 @@ class BattleSideBar extends React.Component {
             null
 
         const availBattles = currentUser ? 
-            <div className="avail-battle-container">
+            <div className="battle-container">
                 <h2>Available Battles!</h2>
                 <ul className="battle-sidebar-list">
                         {battles.map(battle => {
