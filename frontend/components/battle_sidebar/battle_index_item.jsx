@@ -13,7 +13,7 @@ class BattleIndexItem extends React.Component {
         let participantIds = this.state.participant_ids.push(this.props.currentUser.id)
         this.setState({["participant_ids"]: participantIds})
         this.props.updateBattle(this.state)
-            .then((joinedBattle) => this.props.history.push(`/battles/${joinedBattle.battle.data.id}`))
+            .then(() => this.props.fetchBattles())
     }
 
     render() {

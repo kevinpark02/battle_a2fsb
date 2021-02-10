@@ -18,7 +18,8 @@ class BattleSideBar extends React.Component {
 
         const battles = this.props.battles;
         const currentUser = this.props.currentUser;
-        const updateBattle = this.props.updateBattle
+        const updateBattle = this.props.updateBattle;
+        const fetchBattles = this.props.fetchBattles;
 
         const yourBattles = currentUser ? 
             <div className="battle-container">
@@ -31,6 +32,7 @@ class BattleSideBar extends React.Component {
                                                     key={battle.id}
                                                     updateBattle={updateBattle}
                                                     currentUser={currentUser}
+                                                    fetchBattles={fetchBattles}
                                                     />
 
                                 )
@@ -52,6 +54,7 @@ class BattleSideBar extends React.Component {
                                                     key={battle.id}
                                                     updateBattle={updateBattle}
                                                     currentUser={currentUser}
+                                                    fetchBattles={fetchBattles}
                                                     />
 
                                 )

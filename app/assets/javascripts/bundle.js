@@ -491,8 +491,8 @@ var BattleIndexItem = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var participantIds = this.state.participant_ids.push(this.props.currentUser.id);
       this.setState(_defineProperty({}, "participant_ids", participantIds));
-      this.props.updateBattle(this.state).then(function (joinedBattle) {
-        return _this2.props.history.push("/battles/".concat(joinedBattle.battle.data.id));
+      this.props.updateBattle(this.state).then(function () {
+        return _this2.props.fetchBattles();
       });
     }
   }, {
@@ -584,6 +584,7 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
       var battles = this.props.battles;
       var currentUser = this.props.currentUser;
       var updateBattle = this.props.updateBattle;
+      var fetchBattles = this.props.fetchBattles;
       var yourBattles = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battle-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Battles!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
@@ -594,7 +595,8 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
             battle: battle,
             key: battle.id,
             updateBattle: updateBattle,
-            currentUser: currentUser
+            currentUser: currentUser,
+            fetchBattles: fetchBattles
           });
         }
       }))) : null;
@@ -608,7 +610,8 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
             battle: battle,
             key: battle.id,
             updateBattle: updateBattle,
-            currentUser: currentUser
+            currentUser: currentUser,
+            fetchBattles: fetchBattles
           });
         }
       }))) : null;
