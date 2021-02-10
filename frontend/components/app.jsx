@@ -3,6 +3,7 @@ import GreetingContainer from "./greeting/greeting_container";
 import LoginFormContainer from "./session_form/login_form_container";
 import SignupFormContainer from "./session_form/signup_form_container";
 import BattleSideBarContainer from "./battle_sidebar/battle_sidebar_container";
+import BattleShowContainer from "./battle/battle_show_container";
 
 import { Route } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
@@ -15,7 +16,9 @@ const App = () => (
 
     <AuthRoute path="/login" component={LoginFormContainer} />
     <AuthRoute path="/signup" component={SignupFormContainer} />
-    <ProtectedRoute path="/home" component={BattleSideBarContainer}/>
+    <ProtectedRoute exact path="/home" component={BattleSideBarContainer}/>
+    <ProtectedRoute exact path="/battles/:battleId" component={BattleShowContainer}/>
+    <ProtectedRoute exact path="/battles/:battleId" component={BattleSideBarContainer}/>
   </div>
 );
 

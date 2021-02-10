@@ -13,6 +13,7 @@ class BattleIndexItem extends React.Component {
         let participantIds = this.state.participant_ids.push(this.props.currentUser.id)
         this.setState({["participant_ids"]: participantIds})
         this.props.updateBattle(this.state)
+            .then((joinedBattle) => this.props.history.push(`/battles/${joinedBattle.battle.data.id}`))
     }
 
     render() {
@@ -21,7 +22,9 @@ class BattleIndexItem extends React.Component {
             <button className="blue-btn-small" onClick={this.handleJoin}>Join</button>
         return(
             <div className="battle-item">
-                <li className="battle-name"># &nbsp; &nbsp; {this.props.battle.name}</li>
+                <Link to={`/battles/${this.props.battle.id}`}>
+                    <li className="battle-name"># &nbsp; &nbsp; {this.props.battle.name}</li>
+                </Link>
                 {joinButton}
             </div>
         )
