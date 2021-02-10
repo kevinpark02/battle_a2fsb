@@ -98,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/battle_api_util */ "./frontend/util/battle_api_util.js");
 
 var RECEIVE_ALL_BATTLES = "RECEIVE_ALL_BATTLES";
-var RECEIVE_JOINED_BATTLE = "RECEIVE_BATTLE";
+var RECEIVE_JOINED_BATTLE = "RECEIVE_JOINED_BATTLE";
 var receiveAllBattles = function receiveAllBattles(battles) {
   return {
     type: RECEIVE_ALL_BATTLES,

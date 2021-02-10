@@ -1,7 +1,7 @@
 import * as BattleApiUtil from "../util/battle_api_util";
 
 export const RECEIVE_ALL_BATTLES = "RECEIVE_ALL_BATTLES";
-export const RECEIVE_JOINED_BATTLE = "RECEIVE_BATTLE";
+export const RECEIVE_JOINED_BATTLE = "RECEIVE_JOINED_BATTLE";
 
 export const receiveAllBattles = (battles) => ({
     type: RECEIVE_ALL_BATTLES,
