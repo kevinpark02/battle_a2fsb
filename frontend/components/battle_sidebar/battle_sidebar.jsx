@@ -12,8 +12,7 @@ class BattleSideBar extends React.Component {
     }
 
     render() {
-        // debugger
-        if (this.props.battles === undefined) {
+        if (this.props.battles === undefined || this.props.battles.length === 0) {
             return null
         }
 

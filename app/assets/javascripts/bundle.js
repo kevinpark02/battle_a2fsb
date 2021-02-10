@@ -89,7 +89,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_ALL_BATTLES": () => (/* binding */ RECEIVE_ALL_BATTLES),
-/* harmony export */   "RECEIVE_BATTLE": () => (/* binding */ RECEIVE_BATTLE),
+/* harmony export */   "RECEIVE_JOINED_BATTLE": () => (/* binding */ RECEIVE_JOINED_BATTLE),
 /* harmony export */   "receiveAllBattles": () => (/* binding */ receiveAllBattles),
 /* harmony export */   "receiveBattle": () => (/* binding */ receiveBattle),
 /* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles),
@@ -98,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/battle_api_util */ "./frontend/util/battle_api_util.js");
 
 var RECEIVE_ALL_BATTLES = "RECEIVE_ALL_BATTLES";
-var RECEIVE_BATTLE = "RECEIVE_BATTLE";
+var RECEIVE_JOINED_BATTLE = "RECEIVE_BATTLE";
 var receiveAllBattles = function receiveAllBattles(battles) {
   return {
     type: RECEIVE_ALL_BATTLES,
@@ -107,7 +107,7 @@ var receiveAllBattles = function receiveAllBattles(battles) {
 };
 var receiveBattle = function receiveBattle(battle) {
   return {
-    type: RECEIVE_BATTLE,
+    type: RECEIVE_JOINED_BATTLE,
     battle: battle
   };
 };
@@ -388,19 +388,22 @@ var BattleIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "handleJoin",
     value: function handleJoin(e) {
       e.preventDefault();
-      var participantIds = this.setState(_defineProperty({}, "participant_ids", this.state.participant_ids.push(this.props.currentUser.id)));
+      var participantIds = this.state.participant_ids.push(this.props.currentUser.id);
+      this.setState(_defineProperty({}, "participant_ids", participantIds));
+      this.props.updateBattle(this.state);
     }
   }, {
     key: "render",
     value: function render() {
+      var joinButton = this.props.battle.participant_ids.includes(this.props.currentUser.id) ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "blue-btn-small",
+        onClick: this.handleJoin
+      }, "Join");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battle-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "battle-name"
-      }, "# \xA0 \xA0 ", this.props.battle.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "blue-btn-small",
-        onClick: this.handleJoin
-      }, "Join"));
+      }, "# \xA0 \xA0 ", this.props.battle.name), joinButton);
     }
   }]);
 
@@ -469,8 +472,7 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
-      if (this.props.battles === undefined) {
+      if (this.props.battles === undefined || this.props.battles.length === 0) {
         return null;
       }
 
@@ -1155,9 +1157,8 @@ var battleReducer = function battleReducer() {
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_BATTLES:
       return action.battles;
 
-    case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BATTLE:
-      nextState[action.battle.id] = action.battle;
-      return nextState;
+    case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_JOINED_BATTLE:
+      return state;
 
     default:
       return state;
@@ -1413,7 +1414,7 @@ var fetchBattles = function fetchBattles() {
 };
 var updateBattle = function updateBattle(battle) {
   return $.ajax({
-    url: "/api/lists/".concat(battle.id),
+    url: "/api/battles/".concat(battle.id),
     method: "PATCH",
     data: {
       battle: battle

@@ -7,7 +7,7 @@ export const fetchBattles = () => {
 
 export const updateBattle = (battle) => {
   return $.ajax({
-    url: `/api/lists/${battle.id}`,
+    url: `/api/battles/${battle.id}`,
     method: "PATCH",
     data: { battle },
   });

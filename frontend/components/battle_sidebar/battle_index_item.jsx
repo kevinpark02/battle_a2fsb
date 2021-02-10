@@ -10,15 +10,19 @@ class BattleIndexItem extends React.Component {
 
     handleJoin(e) {
         e.preventDefault();
-        let participantIds = 
-        this.setState({["participant_ids"]: this.state.participant_ids.push(this.props.currentUser.id)})
+        let participantIds = this.state.participant_ids.push(this.props.currentUser.id)
+        this.setState({["participant_ids"]: participantIds})
+        this.props.updateBattle(this.state)
     }
 
     render() {
+        let joinButton = this.props.battle.participant_ids.includes(this.props.currentUser.id) ?
+            null :
+            <button className="blue-btn-small" onClick={this.handleJoin}>Join</button>
         return(
             <div className="battle-item">
                 <li className="battle-name"># &nbsp; &nbsp; {this.props.battle.name}</li>
-                <button className="blue-btn-small" onClick={this.handleJoin}>Join</button>
+                {joinButton}
             </div>
         )
     }

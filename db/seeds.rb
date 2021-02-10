@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.delete_all
+Battle.delete_all
 
 # User seed
     u1 = User.create(email: 'test@gmail.com', first_name: "Test", last_name: "Tester", username: "mctest", gender: "Bro", class_of: "1991", password: "battlesb1")

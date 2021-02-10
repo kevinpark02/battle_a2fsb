@@ -1,6 +1,6 @@
 import {
     RECEIVE_ALL_BATTLES,
-    RECEIVE_BATTLE
+    RECEIVE_JOINED_BATTLE
 } from "../actions/battle_actions";
 
 const battleReducer = (state = {}, action) => {
@@ -10,9 +10,8 @@ const battleReducer = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_ALL_BATTLES:
             return action.battles;
-        case RECEIVE_BATTLE:
-            nextState[action.battle.id] = action.battle;
-            return nextState;
+        case RECEIVE_JOINED_BATTLE:
+            return state;
         default:
             return state;
     }
