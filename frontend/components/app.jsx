@@ -15,9 +15,7 @@ const App = () => (
 
     <AuthRoute path="/login" component={LoginFormContainer} />
     <AuthRoute path="/signup" component={SignupFormContainer} />
-    {/* <aside className="battle-sidebar"> */}
-      <ProtectedRoute path="/home" component={BattleSideBarContainer}/>
-    {/* </aside> */}
+    <ProtectedRoute path="/home" component={BattleSideBarContainer}/>
   </div>
 );
 
