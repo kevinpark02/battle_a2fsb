@@ -5,6 +5,14 @@ export const fetchBattles = () => {
     });
 };
 
+export const createBattle = (battle) => {
+  return $.ajax({
+    url: `/api/battles`,
+    method: "POST",
+    data: { battle },
+  });
+};
+
 export const updateBattle = (battle) => {
   return $.ajax({
     url: `/api/battles/${battle.id}`,

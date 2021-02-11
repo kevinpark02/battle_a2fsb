@@ -89,15 +89,19 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_ALL_BATTLES": () => (/* binding */ RECEIVE_ALL_BATTLES),
+/* harmony export */   "RECEIVE_NEW_BATTLE": () => (/* binding */ RECEIVE_NEW_BATTLE),
 /* harmony export */   "RECEIVE_JOINED_BATTLE": () => (/* binding */ RECEIVE_JOINED_BATTLE),
 /* harmony export */   "receiveAllBattles": () => (/* binding */ receiveAllBattles),
-/* harmony export */   "receiveBattle": () => (/* binding */ receiveBattle),
+/* harmony export */   "receiveNewBattle": () => (/* binding */ receiveNewBattle),
+/* harmony export */   "receiveJoinedBattle": () => (/* binding */ receiveJoinedBattle),
 /* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles),
+/* harmony export */   "createBattle": () => (/* binding */ createBattle),
 /* harmony export */   "updateBattle": () => (/* binding */ updateBattle)
 /* harmony export */ });
 /* harmony import */ var _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/battle_api_util */ "./frontend/util/battle_api_util.js");
 
 var RECEIVE_ALL_BATTLES = "RECEIVE_ALL_BATTLES";
+var RECEIVE_NEW_BATTLE = "RECEIVE_BATTLE";
 var RECEIVE_JOINED_BATTLE = "RECEIVE_JOINED_BATTLE";
 var receiveAllBattles = function receiveAllBattles(battles) {
   return {
@@ -105,7 +109,13 @@ var receiveAllBattles = function receiveAllBattles(battles) {
     battles: battles
   };
 };
-var receiveBattle = function receiveBattle(battle) {
+var receiveNewBattle = function receiveNewBattle(battle) {
+  return {
+    type: RECEIVE_NEW_BATTLE,
+    battle: battle
+  };
+};
+var receiveJoinedBattle = function receiveJoinedBattle(battle) {
   return {
     type: RECEIVE_JOINED_BATTLE,
     battle: battle
@@ -118,10 +128,17 @@ var fetchBattles = function fetchBattles() {
     });
   };
 };
+var createBattle = function createBattle(battle) {
+  return function (dispatch) {
+    return _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__.createBattle(battle).then(function (battle) {
+      return dispatch(receiveNewBattle(battle));
+    });
+  };
+};
 var updateBattle = function updateBattle(battle) {
   return function (dispatch) {
     return _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__.updateBattle(battle).then(function (battle) {
-      return dispatch(receiveBattle(battle));
+      return dispatch(receiveJoinedBattle(battle));
     });
   };
 };
@@ -543,6 +560,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _battle_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./battle_index_item */ "./frontend/components/battle_sidebar/battle_index_item.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -564,6 +582,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -626,9 +645,14 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
           });
         }
       }))) : null;
+      var battleForm = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "battle-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        to: "/battles/new"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Create  Battle")));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battle-sidebar-outer-container"
-      }, yourBattles, availBattles);
+      }, yourBattles, availBattles, battleForm);
     }
   }]);
 
@@ -1276,6 +1300,9 @@ var battleReducer = function battleReducer() {
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_BATTLES:
       return action.battles;
 
+    case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_NEW_BATTLE:
+      return Object.assign(nextState, action.battle);
+
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_JOINED_BATTLE:
       return state;
 
@@ -1523,12 +1550,22 @@ var configureStore = function configureStore() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles),
+/* harmony export */   "createBattle": () => (/* binding */ createBattle),
 /* harmony export */   "updateBattle": () => (/* binding */ updateBattle)
 /* harmony export */ });
 var fetchBattles = function fetchBattles() {
   return $.ajax({
     url: "/api/battles",
     method: "GET"
+  });
+};
+var createBattle = function createBattle(battle) {
+  return $.ajax({
+    url: "/api/battles",
+    method: "POST",
+    data: {
+      battle: battle
+    }
   });
 };
 var updateBattle = function updateBattle(battle) {

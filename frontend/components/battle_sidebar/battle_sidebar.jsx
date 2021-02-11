@@ -1,5 +1,6 @@
 import React from 'react';
 import BattleIndexItem from './battle_index_item';
+import { Link } from 'react-router-dom';
 
 class BattleSideBar extends React.Component {
     constructor(props) {
@@ -64,11 +65,19 @@ class BattleSideBar extends React.Component {
             </div>
             : 
             null
+
+        const battleForm = 
+            <div className="battle-form">
+                <Link to={`/battles/new`}>
+                    <h2>Create  Battle</h2>
+                </Link>
+            </div>
         
         return(
             <div className="battle-sidebar-outer-container">
                 {yourBattles}
                 {availBattles}
+                {battleForm}
             </div>
         )
     }
