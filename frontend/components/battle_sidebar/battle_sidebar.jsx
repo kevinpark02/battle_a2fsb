@@ -69,7 +69,7 @@ class BattleSideBar extends React.Component {
         const battleForm = 
             <div className="battle-form">
                 <Link to={`/battles/new`}>
-                    <h2>Create  Battle</h2>
+                    <h2>Create a Battle</h2>
                 </Link>
             </div>
         

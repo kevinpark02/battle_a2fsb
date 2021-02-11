@@ -389,7 +389,10 @@ __webpack_require__.r(__webpack_exports__);
 var mapDipatchToProps = function mapDipatchToProps(dispatch) {
   return {
     createBattle: function createBattle(battle) {
-      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.default)(battle));
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.createBattle)(battle));
+    },
+    fetchBattles: function fetchBattles() {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.fetchBattles)());
     }
   };
 };
@@ -448,7 +451,8 @@ var BattleCreateForm = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      name: ""
+      name: "",
+      create: false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -466,12 +470,23 @@ var BattleCreateForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this3 = this;
+
       e.preventDefault();
+      this.props.createBattle(this.state).then(function () {
+        return _this3.props.fetchBattles();
+      }).then(function () {
+        return _this3.setState(_defineProperty({}, 'create', !_this3.state.create));
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      var otherForm = this.state.create ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Hi") : null;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "battle-create-form-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "battle-create-form",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
@@ -479,9 +494,10 @@ var BattleCreateForm = /*#__PURE__*/function (_React$Component) {
         placeholder: "Battle Name",
         onChange: this.update('name')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "yellow-btn",
         type: "submit",
         value: "Create"
-      })));
+      })), otherForm);
     }
   }]);
 
@@ -782,7 +798,7 @@ var BattleSideBar = /*#__PURE__*/function (_React$Component) {
         className: "battle-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/battles/new"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Create  Battle")));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Create a Battle")));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battle-sidebar-outer-container"
       }, yourBattles, availBattles, battleForm);
@@ -1434,7 +1450,7 @@ var battleReducer = function battleReducer() {
       return action.battles;
 
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_NEW_BATTLE:
-      return Object.assign(nextState, action.battle);
+      return Object.assign(nextState, action.battle.battle);
 
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_JOINED_BATTLE:
       return state;

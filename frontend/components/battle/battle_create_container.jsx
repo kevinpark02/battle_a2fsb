@@ -1,5 +1,5 @@
 import BattleCreateForm from "./battle_create_form";
-import createBattle from "../../actions/battle_actions"
+import { createBattle, fetchBattles }from "../../actions/battle_actions";
 import { connect } from "react-redux";
 
 // const mapStateToProps = (state) => {
@@ -10,7 +10,8 @@ import { connect } from "react-redux";
 
 const mapDipatchToProps = (dispatch) => {
     return({
-        createBattle: (battle) => dispatch(createBattle(battle))
+        createBattle: (battle) => dispatch(createBattle(battle)),
+        fetchBattles: () => dispatch(fetchBattles())
     })
 }
 
