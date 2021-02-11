@@ -10,4 +10,9 @@
 #
 class Battle < ApplicationRecord
     validates :name, presence: true
+
+    has_many :tasks
+        primary_key: :id,
+        foreign_key: :battle_id,
+        class_name: :Task
 end
