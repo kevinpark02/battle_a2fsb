@@ -17,8 +17,10 @@ const App = () => (
     <AuthRoute path="/login" component={LoginFormContainer} />
     <AuthRoute path="/signup" component={SignupFormContainer} />
     <ProtectedRoute exact path="/home" component={BattleSideBarContainer}/>
-    <ProtectedRoute exact path="/battles/:battleId" component={BattleShowContainer}/>
-    <ProtectedRoute exact path="/battles/:battleId" component={BattleSideBarContainer}/>
+    <div className="sidebar-show-container">
+      <ProtectedRoute exact path="/battles/:battleId" component={BattleSideBarContainer}/>
+      <ProtectedRoute exact path="/battles/:battleId" component={BattleShowContainer}/>
+    </div>
   </div>
 );
 

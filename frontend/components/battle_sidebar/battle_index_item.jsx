@@ -20,11 +20,15 @@ class BattleIndexItem extends React.Component {
         let joinButton = this.props.battle.participant_ids.includes(this.props.currentUser.id) ?
             null :
             <button className="blue-btn-small" onClick={this.handleJoin}>Join</button>
-        return(
-            <div className="battle-item">
+        
+        let battle = this.props.battle.participant_ids.includes(this.props.currentUser.id) ?
                 <Link to={`/battles/${this.props.battle.id}`}>
                     <li className="battle-name"># &nbsp; &nbsp; {this.props.battle.name}</li>
-                </Link>
+                </Link> :
+                <li className="battle-name"># &nbsp; &nbsp; {this.props.battle.name}</li>
+        return(
+            <div className="battle-item">
+                {battle}
                 {joinButton}
             </div>
         )

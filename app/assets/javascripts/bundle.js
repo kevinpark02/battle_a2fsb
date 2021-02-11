@@ -325,15 +325,17 @@ var App = function App() {
     exact: true,
     path: "/home",
     component: _battle_sidebar_battle_sidebar_container__WEBPACK_IMPORTED_MODULE_4__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "sidebar-show-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__.ProtectedRoute, {
+    exact: true,
+    path: "/battles/:battleId",
+    component: _battle_sidebar_battle_sidebar_container__WEBPACK_IMPORTED_MODULE_4__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__.ProtectedRoute, {
     exact: true,
     path: "/battles/:battleId",
     component: _battle_battle_show_container__WEBPACK_IMPORTED_MODULE_5__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__.ProtectedRoute, {
-    exact: true,
-    path: "/battles/:battleId",
-    component: _battle_sidebar_battle_sidebar_container__WEBPACK_IMPORTED_MODULE_4__.default
-  }));
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -390,7 +392,13 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
   _createClass(BattleShow, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Battle Show Page");
+      if (this.props.battle === undefined) {
+        return null;
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "battle-show-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.battle.name));
     }
   }]);
 
@@ -502,13 +510,16 @@ var BattleIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "blue-btn-small",
         onClick: this.handleJoin
       }, "Join");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "battle-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      var battle = this.props.battle.participant_ids.includes(this.props.currentUser.id) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/battles/".concat(this.props.battle.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "battle-name"
-      }, "# \xA0 \xA0 ", this.props.battle.name)), joinButton);
+      }, "# \xA0 \xA0 ", this.props.battle.name)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "battle-name"
+      }, "# \xA0 \xA0 ", this.props.battle.name);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "battle-item"
+      }, battle, joinButton);
     }
   }]);
 

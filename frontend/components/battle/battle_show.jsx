@@ -6,8 +6,15 @@ class BattleShow extends React.Component {
     }
 
     render() {
+        if (this.props.battle === undefined) {
+            return null
+        }
+
         return(
-            <h1>Battle Show Page</h1>
+            <div className="battle-show-container">
+                <h1>{this.props.battle.name}</h1>
+            </div>
+            
         )
     }
 }
