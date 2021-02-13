@@ -5,6 +5,13 @@ export const fetchBattles = () => {
     });
 };
 
+export const fetchBattle = (battleId) => {
+  return $.ajax({
+    url: `/api/battles/${battleId}`,
+    method: "GET",
+  });
+};
+
 export const createBattle = (battle) => {
   return $.ajax({
     url: `/api/battles`,

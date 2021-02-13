@@ -89,24 +89,34 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_ALL_BATTLES": () => (/* binding */ RECEIVE_ALL_BATTLES),
+/* harmony export */   "RECEIVE_BATTLE": () => (/* binding */ RECEIVE_BATTLE),
 /* harmony export */   "RECEIVE_NEW_BATTLE": () => (/* binding */ RECEIVE_NEW_BATTLE),
 /* harmony export */   "RECEIVE_JOINED_BATTLE": () => (/* binding */ RECEIVE_JOINED_BATTLE),
 /* harmony export */   "receiveAllBattles": () => (/* binding */ receiveAllBattles),
+/* harmony export */   "receiveBattle": () => (/* binding */ receiveBattle),
 /* harmony export */   "receiveNewBattle": () => (/* binding */ receiveNewBattle),
 /* harmony export */   "receiveJoinedBattle": () => (/* binding */ receiveJoinedBattle),
 /* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles),
+/* harmony export */   "fetchBattle": () => (/* binding */ fetchBattle),
 /* harmony export */   "createBattle": () => (/* binding */ createBattle),
 /* harmony export */   "updateBattle": () => (/* binding */ updateBattle)
 /* harmony export */ });
 /* harmony import */ var _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/battle_api_util */ "./frontend/util/battle_api_util.js");
 
 var RECEIVE_ALL_BATTLES = "RECEIVE_ALL_BATTLES";
+var RECEIVE_BATTLE = "RECEIVE_BATTLE";
 var RECEIVE_NEW_BATTLE = "RECEIVE_BATTLE";
 var RECEIVE_JOINED_BATTLE = "RECEIVE_JOINED_BATTLE";
 var receiveAllBattles = function receiveAllBattles(battles) {
   return {
     type: RECEIVE_ALL_BATTLES,
     battles: battles
+  };
+};
+var receiveBattle = function receiveBattle(battle) {
+  return {
+    type: RECEIVE_BATTLE,
+    battle: battle
   };
 };
 var receiveNewBattle = function receiveNewBattle(battle) {
@@ -125,6 +135,13 @@ var fetchBattles = function fetchBattles() {
   return function (dispatch) {
     return _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchBattles().then(function (battles) {
       return dispatch(receiveAllBattles(battles));
+    });
+  };
+};
+var fetchBattle = function fetchBattle(battle) {
+  return function (dispatch) {
+    return _util_battle_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchBattle(battle).then(function (battle) {
+      return dispatch(receiveBattle(battle));
     });
   };
 };
@@ -219,6 +236,39 @@ var signup = function signup(user) {
     }, function (errors) {
       return dispatch(receiveSessionErrors(errors.responseJSON));
     });
+  };
+};
+
+/***/ }),
+
+/***/ "./frontend/actions/task_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/task_actions.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_TASK": () => (/* binding */ RECEIVE_TASK),
+/* harmony export */   "REMOVE_TASK": () => (/* binding */ REMOVE_TASK),
+/* harmony export */   "receiveTask": () => (/* binding */ receiveTask),
+/* harmony export */   "removeTask": () => (/* binding */ removeTask)
+/* harmony export */ });
+/* harmony import */ var _util_task_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/task_api_util */ "./frontend/util/task_api_util.js");
+
+var RECEIVE_TASK = "RECEIVE_TASK";
+var REMOVE_TASK = "REMOVE_TASK";
+var receiveTask = function receiveTask(task) {
+  return {
+    type: RECEIVE_TASK,
+    task: task
+  };
+};
+var removeTask = function removeTask(taskId) {
+  return {
+    type: REMOVE_TASK,
+    taskId: taskId
   };
 };
 
@@ -556,8 +606,25 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(BattleShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // this.props.fetchBattle(this.props.battle.id);
+      console.log("component did mount");
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.battle.id != this.props.battle.id) {
+        this.props.fetchBattle(this.props.battle.id);
+      }
+
+      ;
+    }
+  }, {
     key: "render",
     value: function render() {
+      console.log("this is render");
+
       if (this.props.battle === undefined) {
         return null;
       }
@@ -587,7 +654,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _battle_show__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./battle_show */ "./frontend/components/battle/battle_show.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/battle_actions */ "./frontend/actions/battle_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
 
 
 
@@ -597,7 +666,15 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, null)(_battle_show__WEBPACK_IMPORTED_MODULE_0__.default));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchBattle: function fetchBattle(battle) {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.fetchBattle)(battle));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapStateToProps, mapDispatchToProps)(_battle_show__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 
@@ -1449,6 +1526,9 @@ var battleReducer = function battleReducer() {
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_BATTLES:
       return action.battles;
 
+    case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BATTLE:
+      return Object.assign(nextState, action.battle.battle);
+
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_NEW_BATTLE:
       return Object.assign(nextState, action.battle.battle);
 
@@ -1475,15 +1555,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _battle_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./battle_reducer */ "./frontend/reducers/battle_reducer.js");
+/* harmony import */ var _task_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./task_reducer */ "./frontend/reducers/task_reducer.js");
 
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  battles: _battle_reducer__WEBPACK_IMPORTED_MODULE_1__.default
+  battles: _battle_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  tasks: _task_reducer__WEBPACK_IMPORTED_MODULE_2__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1617,6 +1700,45 @@ var sessionReducer = function sessionReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/task_reducer.js":
+/*!*******************************************!*\
+  !*** ./frontend/reducers/task_reducer.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_task_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/task_actions */ "./frontend/actions/task_actions.js");
+/* harmony import */ var _actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/battle_actions */ "./frontend/actions/battle_actions.js");
+
+
+
+var tasksReducer = function tasksReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var nextState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_BATTLE:
+      return Object.assign(nextState, action.battle.tasks);
+
+    case _actions_task_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_TASK:
+      delete nextState[action.taskId];
+      return nextState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tasksReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/users_reducer.js":
 /*!********************************************!*\
   !*** ./frontend/reducers/users_reducer.js ***!
@@ -1699,12 +1821,19 @@ var configureStore = function configureStore() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchBattles": () => (/* binding */ fetchBattles),
+/* harmony export */   "fetchBattle": () => (/* binding */ fetchBattle),
 /* harmony export */   "createBattle": () => (/* binding */ createBattle),
 /* harmony export */   "updateBattle": () => (/* binding */ updateBattle)
 /* harmony export */ });
 var fetchBattles = function fetchBattles() {
   return $.ajax({
     url: "/api/battles",
+    method: "GET"
+  });
+};
+var fetchBattle = function fetchBattle(battleId) {
+  return $.ajax({
+    url: "/api/battles/".concat(battleId),
     method: "GET"
   });
 };
@@ -1825,6 +1954,46 @@ var login = function login(user) {
 var logout = function logout() {
   return $.ajax({
     url: "/api/session",
+    method: "DELETE"
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/task_api_util.js":
+/*!****************************************!*\
+  !*** ./frontend/util/task_api_util.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createTask": () => (/* binding */ createTask),
+/* harmony export */   "updateTask": () => (/* binding */ updateTask),
+/* harmony export */   "deleteTask": () => (/* binding */ deleteTask)
+/* harmony export */ });
+var createTask = function createTask(task) {
+  return $.ajax({
+    url: "/api/tasks",
+    method: "POST",
+    data: {
+      task: task
+    }
+  });
+};
+var updateTask = function updateTask(task) {
+  return $.ajax({
+    url: "/api/tasks/".concat(task.id),
+    method: "PATCH",
+    data: {
+      task: task
+    }
+  });
+};
+var deleteTask = function deleteTask(taskId) {
+  return $.ajax({
+    url: "/api/tasks/".concat(taskId),
     method: "DELETE"
   });
 };
