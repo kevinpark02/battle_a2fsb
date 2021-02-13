@@ -608,8 +608,7 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
   _createClass(BattleShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // this.props.fetchBattle(this.props.battle.id);
-      console.log("component did mount");
+      this.props.fetchBattle(this.props.battle.id); // console.log("component did mount")
     }
   }, {
     key: "componentDidUpdate",
@@ -617,8 +616,6 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
       if (prevProps.battle.id != this.props.battle.id) {
         this.props.fetchBattle(this.props.battle.id);
       }
-
-      ;
     }
   }, {
     key: "render",
@@ -1724,7 +1721,11 @@ var tasksReducer = function tasksReducer() {
 
   switch (action.type) {
     case _actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_BATTLE:
-      return Object.assign(nextState, action.battle.tasks);
+      if (action.battle.tasks === undefined) {
+        return {};
+      } else {
+        return action.battle.tasks;
+      }
 
     case _actions_task_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_TASK:
       delete nextState[action.taskId];

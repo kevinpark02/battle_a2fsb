@@ -12,7 +12,11 @@ const tasksReducer = (state ={}, action) => {
 
     switch (action.type) {
         case RECEIVE_BATTLE:
-            return Object.assign(nextState, action.battle.tasks)
+            if (action.battle.tasks === undefined) {
+                return {}
+            } else {
+                return action.battle.tasks;
+            }
         case REMOVE_TASK:
             delete nextState[action.taskId]
             return nextState

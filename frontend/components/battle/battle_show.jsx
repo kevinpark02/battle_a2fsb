@@ -6,14 +6,14 @@ class BattleShow extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.fetchBattle(this.props.battle.id);
-        console.log("component did mount")
+        this.props.fetchBattle(this.props.battle.id);
+        // console.log("component did mount")
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.battle.id != this.props.battle.id) {
-            this.props.fetchBattle(this.props.battle.id)
-        };
+            this.props.fetchBattle(this.props.battle.id);
+        } 
     }
 
     render() {
