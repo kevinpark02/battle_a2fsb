@@ -608,13 +608,16 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
   _createClass(BattleShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchBattle(this.props.battle.id); // console.log("component did mount")
+      console.log("component did mount");
+      this.props.fetchBattle(this.props.battleId);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.battle.id != this.props.battle.id) {
-        this.props.fetchBattle(this.props.battle.id);
+      console.log("component did update");
+
+      if (prevProps.battleId != this.props.battleId) {
+        this.props.fetchBattle(this.props.battleId);
       }
     }
   }, {
@@ -659,12 +662,16 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
+    battleId: ownProps.match.params.battleId,
     battle: state.entities.battles[ownProps.match.params.battleId]
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    fetchBattles: function fetchBattles() {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.fetchBattles)());
+    },
     fetchBattle: function fetchBattle(battle) {
       return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.fetchBattle)(battle));
     }
