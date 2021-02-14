@@ -608,14 +608,11 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
   _createClass(BattleShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log("component did mount");
       this.props.fetchBattle(this.props.battleId);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      console.log("component did update");
-
       if (prevProps.battleId != this.props.battleId) {
         this.props.fetchBattle(this.props.battleId);
       }
@@ -623,8 +620,6 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log("this is render");
-
       if (this.props.battle === undefined) {
         return null;
       }
