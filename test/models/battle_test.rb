@@ -7,6 +7,7 @@
 #  participant_ids :integer          default([]), is an Array
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  mode            :string           not null
 #
 require 'test_helper'
 

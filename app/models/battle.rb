@@ -7,9 +7,10 @@
 #  participant_ids :integer          default([]), is an Array
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  mode            :string           not null
 #
 class Battle < ApplicationRecord
-    validates :name, presence: true
+    validates :name, :mode, presence: true
 
     has_many :tasks,
         primary_key: :id,
