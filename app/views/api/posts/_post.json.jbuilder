@@ -1,0 +1,1 @@
+json.extract! post, :id, :body, :battle_id, :user_id

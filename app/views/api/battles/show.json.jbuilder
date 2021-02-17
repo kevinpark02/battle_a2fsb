@@ -11,3 +11,11 @@ json.tasks do
         end
     end
 end
+
+json.posts do
+    @battle.posts.each do |post|
+        json.set! post.id do
+            json.extract! post, :id, :body, :battle_id, :user_id
+        end
+    end
+end
