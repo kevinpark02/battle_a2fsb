@@ -30,6 +30,11 @@ class User < ApplicationRecord
 
     # ASSOCIATIONS - START
 
+    has_many :posts,
+        primary_key: :id,
+        foreign_key: :user_id,
+        class_name: :Post
+
     # ASSOCIATIONS - END
 
 # -----------------------------------------------------------------

@@ -22,4 +22,12 @@ Task.delete_all
 # Task seed
     t1 = Task.create(name: "Run a mile", points: 200, battle_id: b1.id)
     t2 = Task.create(name: "Crunchy Frog", points: 1, battle_id: b1.id)
-    t1 = Task.create(name: "Burpee", points: 10, battle_id: b1.id)
+    t3 = Task.create(name: "Burpee", points: 10, battle_id: b1.id)
+
+    t4 = Task.create(name: "Tidy for 10 minutes", points: 50, battle_id: b2.id)
+    t5 = Task.create(name: "Clean one part of your house", points: 100, battle_id: b2.id)
+    t6 = Task.create(name: "Throw away a trashbag worth of junk", points: 200, battle_id: b2.id)
+
+    t7 = Task.create(name: "Cook for your family", points: 100, battle_id: b3.id)
+    t8 = Task.create(name: "Cook for more than 10 people and invite them over", points: 200, battle_id: b3.id)
+    t9 = Task.create(name: "Develop your own recipe and make it", points: 250, battle_id: b3.id)

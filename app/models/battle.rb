@@ -16,4 +16,9 @@ class Battle < ApplicationRecord
         primary_key: :id,
         foreign_key: :battle_id,
         class_name: :Task
+
+    has_many :posts,
+        primary_key: :id,
+        foreign_key: :battle_id,
+        class_name: :Post
 end
