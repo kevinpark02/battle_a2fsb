@@ -1,4 +1,5 @@
 import React from 'react';
+import PostFormContainer from "../../components/post/create_post_container"
 
 class BattleShow extends React.Component {
     constructor(props) {
@@ -23,6 +24,8 @@ class BattleShow extends React.Component {
         return(
             <div className="battle-show-container">
                 <h1>{this.props.battle.name}</h1>
+                <PostFormContainer battle={this.props.battle}
+                                   />
             </div>
             
         )
