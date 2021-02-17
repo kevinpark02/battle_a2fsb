@@ -7,7 +7,7 @@ class Api::BattlesController < ApplicationController
     end
 
     def show
-        @battle = Battle.includes(:tasks).find_by(id: params[:id])
+        @battle = Battle.includes(:tasks, :posts).find_by(id: params[:id])
     end
 
     def create
