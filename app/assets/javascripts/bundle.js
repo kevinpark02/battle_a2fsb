@@ -1126,13 +1126,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    battleId: ownProps.battle.id,
-    userId: state.session.id,
     tasks: Object.values(state.entities.tasks),
     postContent: {
       body: "",
-      battle_id: battleId,
-      user_id: userId
+      battle_id: ownProps.battle.id,
+      user_id: state.session.id,
+      score_board: {}
     }
   };
 };
@@ -1163,6 +1162,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1191,21 +1192,100 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(PostForm);
 
   function PostForm(props) {
+    var _this;
+
     _classCallCheck(this, PostForm);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = _this.props.postContent;
+    _this.handleCheckboxChange = _this.handleCheckboxChange.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(PostForm, [{
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "handleCheckboxChange",
+    value: function handleCheckboxChange(e) {
+      var scoreBoard = Object.assign({}, this.state.score_board);
+
+      if (e.target.checked && e.target.value !== "together") {
+        if (scoreBoard[e.target.name]) {
+          scoreBoard[e.target.name] = scoreBoard[e.target.name] + e.target.value;
+        } else {
+          scoreBoard[e.target.name] = e.target.value;
+        }
+
+        this.setState({
+          score_board: scoreBoard
+        });
+      } else if (!e.target.checked && e.target.value !== "together") {
+        scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) - parseInt(e.target.value);
+        this.setState({
+          score_board: scoreBoard
+        });
+      } else if (e.target.checked && e.target.value === "together") {
+        scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) * 2;
+        this.setState({
+          score_board: scoreBoard
+        });
+      } else if (!e.target.checked && e.target.value === "together") {
+        scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) / 2;
+        this.setState({
+          score_board: scoreBoard
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var tasks = this.props.tasks;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
-        name: "",
-        id: "",
-        cols: "30",
-        rows: "10"
-      })));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "post-form-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "post-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.body,
+        placeholder: "Share your post!",
+        onChange: this.update('body')
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, this.props.tasks.map(function (task) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "post-form-checkbox-container",
+          key: task.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "post-form-checkbox-left"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "checkbox",
+          id: task.id,
+          name: task.name,
+          value: task.points,
+          onChange: _this3.handleCheckboxChange
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          htmlFor: task.name
+        }, task.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "post-form-checkbox-right"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "checkbox",
+          id: task.id,
+          name: task.name,
+          value: "together",
+          onChange: _this3.handleCheckboxChange
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          htmlFor: "together"
+        }, "Did it with a friend(s)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "post-form-checkbox-score"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Points Earned: ", _this3.state.score_board[task.name])));
+      }))));
     }
   }]);
 

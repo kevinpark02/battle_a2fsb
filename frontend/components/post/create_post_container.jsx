@@ -4,13 +4,12 @@ import { createPost } from "../../actions/post_actions";
 
 const mapStateToProps = (state, ownProps) => {
     return({
-        battleId: ownProps.battle.id,
-        userId: state.session.id,
         tasks: Object.values(state.entities.tasks),
         postContent: {
             body: "",
-            battle_id: battleId,
-            user_id: userId
+            battle_id: ownProps.battle.id,
+            user_id: state.session.id,
+            score_board: {}
         }
     });
 };
