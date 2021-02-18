@@ -15,9 +15,9 @@ Task.delete_all
     u2 = User.create(email: 'carol.h.yang@gmail.com', first_name: "Carol", last_name: "Park", username: "cp629", gender: "Sis", class_of: "2013", password: "battlesb2")
 
 # Battle seed
-    b1 = Battle.create(name: "Fresh Wind", mode: "gender")
-    b2 = Battle.create(name: "Fresh Start", mode: "team")
-    b3 = Battle.create(name: "Fresh Fire", mode: "class")
+    b1 = Battle.create(name: "Fresh Wind", mode: "gender", score_board: {"Bro" => 0, "Sis" => 0})
+    b2 = Battle.create(name: "Fresh Start", mode: "team", score_board: {"Bro" => 0, "Sis" => 0})
+    b3 = Battle.create(name: "Fresh Fire", mode: "class", score_board: {"Bro" => 0, "Sis" => 0})
 
 # Task seed
     t1 = Task.create(name: "Run a mile", points: 200, battle_id: b1.id)
