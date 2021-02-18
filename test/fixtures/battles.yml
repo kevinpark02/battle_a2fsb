@@ -8,6 +8,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  mode            :string           not null
+#  score_board     :text
 #
 
 # This model initially had no columns defined. If you add columns to the

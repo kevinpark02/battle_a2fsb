@@ -8,6 +8,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  mode            :string           not null
+#  score_board     :text
 #
 require 'test_helper'
 

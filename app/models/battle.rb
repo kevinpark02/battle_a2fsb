@@ -8,9 +8,11 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  mode            :string           not null
+#  score_board     :text
 #
 class Battle < ApplicationRecord
     validates :name, :mode, presence: true
+    serialize :score_board
 
     has_many :tasks,
         primary_key: :id,
