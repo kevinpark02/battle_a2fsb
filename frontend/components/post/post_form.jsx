@@ -5,41 +5,47 @@ class PostForm extends React.Component {
         super(props)
         this.state = this.props.postContent
 
-        this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+        this.handleScore = this.handleScore.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     update(field) {
         return e => this.setState({ [field]: e.target.value })
     }
 
-    handleCheckboxChange(e) {
-        let scoreBoard = Object.assign({}, this.state.score_board)
-
-        if (e.target.checked && e.target.value !== "together") {
-            if (scoreBoard[e.target.name]) {
-                scoreBoard[e.target.name] = scoreBoard[e.target.name] + e.target.value
-            } else {
-                scoreBoard[e.target.name] = e.target.value
-            }
-            this.setState({ score_board: scoreBoard })
-        } else if (!e.target.checked && e.target.value !== "together") {
-            scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) - parseInt(e.target.value)
-            this.setState({ score_board: scoreBoard })
-        } else if (e.target.checked && e.target.value === "together") {
-            scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) * 2
-            this.setState({ score_board: scoreBoard })
-        } else if (!e.target.checked && e.target.value === "together") {
-            scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) / 2
-            this.setState({ score_board: scoreBoard })
+    handleScore(e) {
+        let pointsEarned = Object.assign({}, this.state.points_earned)
+        if (e.target.value === "") {
+            pointsEarned[e.target.name] = 0
+        } else {
+            pointsEarned[e.target.name] = parseInt(e.target.id) * parseInt(e.target.value)
         }
-  }
+        this.setState({ points_earned: pointsEarned })
+    }
+
+    handleCheckboxChange(e) {
+        let pointsEarned = Object.assign({}, this.state.points_earned)
+        
+        if (e.target.checked && pointsEarned[e.target.name]) {
+            pointsEarned[e.target.name] = parseInt(pointsEarned[e.target.name]) * 2
+            this.setState({ points_earned: pointsEarned })
+        } else if (!e.target.checked && pointsEarned[e.target.name]) {
+            pointsEarned[e.target.name] = parseInt(pointsEarned[e.target.name]) / 2
+            this.setState({ points_earned: pointsEarned })
+        }
+    }
+
+    handleSubmit(e) {
+
+    }
 
     render(){
         const tasks = this.props.tasks
 
         return(
             <div className="post-form-container">
-                <form className="post-form">
+                <form className="post-form" onSubmit={this.handleSubmit}>
                     <input type="text"
                            value={this.state.body}
                            placeholder="Share your post!"
@@ -49,12 +55,13 @@ class PostForm extends React.Component {
                             return(
                                 <div className="post-form-checkbox-container" key={task.id}>
                                     <div className="post-form-checkbox-left">
-                                        <input type="checkbox" 
-                                               id={task.id} 
-                                               name={task.name} 
-                                               value={task.points}
-                                               onChange={this.handleCheckboxChange}/>
-                                        <label htmlFor={task.name}>{task.name}</label>
+                                        <label htmlFor="">
+                                            {task.name}: &nbsp;
+                                            <input type="text"
+                                                name={task.name}
+                                                id={task.points}
+                                                onChange={this.handleScore}/>
+                                        </label>
                                     </div>
                                     <div className="post-form-checkbox-right">
                                         <input type="checkbox" 
@@ -65,12 +72,13 @@ class PostForm extends React.Component {
                                         <label htmlFor="together">Did it with a friend(s)</label>
                                     </div>
                                     <div className="post-form-checkbox-score">
-                                        <p>Points Earned: {this.state.score_board[task.name]}</p>
+                                        <p>Points Earned: {this.state.points_earned[task.name]}</p>
                                     </div>
                                 </div>
                             )
                         })}
                     </ul>
+                    <p>Total Points Earned: {Object.values(this.state.points_earned).reduce((a, b) => a + b, 0)}</p>
                 </form>
             </div>
         )

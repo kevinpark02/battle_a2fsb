@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
             body: "",
             battle_id: ownProps.battle.id,
             user_id: state.session.id,
-            score_board: {}
+            points_earned: {}
         }
     });
 };

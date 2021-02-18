@@ -1131,7 +1131,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
       body: "",
       battle_id: ownProps.battle.id,
       user_id: state.session.id,
-      score_board: {}
+      points_earned: {}
     }
   };
 };
@@ -1199,6 +1199,8 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = _this.props.postContent;
     _this.handleCheckboxChange = _this.handleCheckboxChange.bind(_assertThisInitialized(_this));
+    _this.handleScore = _this.handleScore.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1212,37 +1214,40 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "handleScore",
+    value: function handleScore(e) {
+      var pointsEarned = Object.assign({}, this.state.points_earned);
+
+      if (e.target.value === "") {
+        pointsEarned[e.target.name] = 0;
+      } else {
+        pointsEarned[e.target.name] = parseInt(e.target.id) * parseInt(e.target.value);
+      }
+
+      this.setState({
+        points_earned: pointsEarned
+      });
+    }
+  }, {
     key: "handleCheckboxChange",
     value: function handleCheckboxChange(e) {
-      var scoreBoard = Object.assign({}, this.state.score_board);
+      var pointsEarned = Object.assign({}, this.state.points_earned);
 
-      if (e.target.checked && e.target.value !== "together") {
-        if (scoreBoard[e.target.name]) {
-          scoreBoard[e.target.name] = scoreBoard[e.target.name] + e.target.value;
-        } else {
-          scoreBoard[e.target.name] = e.target.value;
-        }
-
+      if (e.target.checked && pointsEarned[e.target.name]) {
+        pointsEarned[e.target.name] = parseInt(pointsEarned[e.target.name]) * 2;
         this.setState({
-          score_board: scoreBoard
+          points_earned: pointsEarned
         });
-      } else if (!e.target.checked && e.target.value !== "together") {
-        scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) - parseInt(e.target.value);
+      } else if (!e.target.checked && pointsEarned[e.target.name]) {
+        pointsEarned[e.target.name] = parseInt(pointsEarned[e.target.name]) / 2;
         this.setState({
-          score_board: scoreBoard
-        });
-      } else if (e.target.checked && e.target.value === "together") {
-        scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) * 2;
-        this.setState({
-          score_board: scoreBoard
-        });
-      } else if (!e.target.checked && e.target.value === "together") {
-        scoreBoard[e.target.name] = parseInt(scoreBoard[e.target.name]) / 2;
-        this.setState({
-          score_board: scoreBoard
+          points_earned: pointsEarned
         });
       }
     }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {}
   }, {
     key: "render",
     value: function render() {
@@ -1252,7 +1257,8 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "post-form-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        className: "post-form"
+        className: "post-form",
+        onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         value: this.state.body,
@@ -1264,15 +1270,14 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
           key: task.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "post-form-checkbox-left"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "checkbox",
-          id: task.id,
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          htmlFor: ""
+        }, task.name, ": \xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "text",
           name: task.name,
-          value: task.points,
-          onChange: _this3.handleCheckboxChange
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-          htmlFor: task.name
-        }, task.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: task.points,
+          onChange: _this3.handleScore
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "post-form-checkbox-right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "checkbox",
@@ -1284,8 +1289,10 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
           htmlFor: "together"
         }, "Did it with a friend(s)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "post-form-checkbox-score"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Points Earned: ", _this3.state.score_board[task.name])));
-      }))));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Points Earned: ", _this3.state.points_earned[task.name])));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Total Points Earned: ", Object.values(this.state.points_earned).reduce(function (a, b) {
+        return a + b;
+      }, 0))));
     }
   }]);
 
