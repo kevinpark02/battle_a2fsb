@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import PostForm from "./post_form";
+import { updateBattle } from "../../actions/battle_actions";
 import { createPost } from "../../actions/post_actions";
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return({
         createPost: (post) => dispatch(createPost(post)),
+        updateBattle: (battle) => dispatch(updateBattle(battle))
     });
 };
 

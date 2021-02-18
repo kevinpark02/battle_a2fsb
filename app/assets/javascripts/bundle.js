@@ -679,13 +679,17 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       if (this.props.battle === undefined) {
         return null;
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "battle-show-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.battle.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_post_create_post_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.battle.name), Object.keys(this.props.battle.score_board).map(function (team) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, team, ": ", _this.props.battle.score_board[team]);
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_post_create_post_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         battle: this.props.battle
       }));
     }
@@ -1119,7 +1123,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _post_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./post_form */ "./frontend/components/post/post_form.jsx");
-/* harmony import */ var _actions_post_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/post_actions */ "./frontend/actions/post_actions.js");
+/* harmony import */ var _actions_battle_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/battle_actions */ "./frontend/actions/battle_actions.js");
+/* harmony import */ var _actions_post_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/post_actions */ "./frontend/actions/post_actions.js");
+
 
 
 
@@ -1139,7 +1145,10 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createPost: function createPost(post) {
-      return dispatch((0,_actions_post_actions__WEBPACK_IMPORTED_MODULE_2__.createPost)(post));
+      return dispatch((0,_actions_post_actions__WEBPACK_IMPORTED_MODULE_3__.createPost)(post));
+    },
+    updateBattle: function updateBattle(battle) {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_2__.updateBattle)(battle));
     }
   };
 };

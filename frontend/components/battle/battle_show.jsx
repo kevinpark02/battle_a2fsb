@@ -24,6 +24,13 @@ class BattleShow extends React.Component {
         return(
             <div className="battle-show-container">
                 <h1>{this.props.battle.name}</h1>
+                {Object.keys(this.props.battle.score_board).map(team => {
+                    return(
+                        <div>
+                            {team}: {this.props.battle.score_board[team]}
+                        </div>
+                    )
+                })}
                 <PostFormContainer battle={this.props.battle}
                                    />
             </div>
