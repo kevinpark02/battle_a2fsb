@@ -695,7 +695,10 @@ var BattleShow = /*#__PURE__*/function (_React$Component) {
         }, team, ": ", _this.props.battle.score_board[team]);
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_post_create_post_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         battle: this.props.battle
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_post_battle_post_container__WEBPACK_IMPORTED_MODULE_2__.default, null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_post_battle_post_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+        battle: this.props.battle,
+        battleId: this.props.battleId
+      }));
     }
   }]);
 
@@ -1190,21 +1193,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _battle_post__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./battle_post */ "./frontend/components/post/battle_post.jsx");
+/* harmony import */ var _actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/battle_actions */ "./frontend/actions/battle_actions.js");
+/* harmony import */ var _battle_post__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./battle_post */ "./frontend/components/post/battle_post.jsx");
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     posts: Object.values(state.entities.posts)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchBattle: function fetchBattle(battle) {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_1__.fetchBattle)(battle));
+    }
+  };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, null)(_battle_post__WEBPACK_IMPORTED_MODULE_1__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_battle_post__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -1244,6 +1253,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createPost: function createPost(post) {
       return dispatch((0,_actions_post_actions__WEBPACK_IMPORTED_MODULE_3__.createPost)(post));
+    },
+    fetchBattle: function fetchBattle(battle) {
+      return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_2__.fetchBattle)(battle));
     },
     updateBattle: function updateBattle(battle) {
       return dispatch((0,_actions_battle_actions__WEBPACK_IMPORTED_MODULE_2__.updateBattle)(battle));
@@ -1355,13 +1367,17 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this3 = this;
+
       e.preventDefault();
-      this.props.createPost(this.state);
+      this.props.createPost(this.state).then(function () {
+        return _this3.props.fetchBattle(_this3.state.battle_id);
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var tasks = this.props.tasks;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1386,7 +1402,7 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
           type: "text",
           name: task.name,
           id: task.points,
-          onChange: _this3.handleScore
+          onChange: _this4.handleScore
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "post-form-checkbox-right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -1394,12 +1410,12 @@ var PostForm = /*#__PURE__*/function (_React$Component) {
           id: task.id,
           name: task.name,
           value: "together",
-          onChange: _this3.handleCheckboxChange
+          onChange: _this4.handleCheckboxChange
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
           htmlFor: "together"
         }, "Did it with a friend(s)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "post-form-checkbox-score"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Points Earned: ", _this3.state.points_earned[task.name])));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Points Earned: ", _this4.state.points_earned[task.name])));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Total Points Earned: ", Object.values(this.state.points_earned).reduce(function (a, b) {
         return a + b;
       }, 0)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {

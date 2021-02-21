@@ -34,7 +34,8 @@ class BattleShow extends React.Component {
                 })}
                 <PostFormContainer battle={this.props.battle}
                                    />
-                <BattlePostContainer />
+                <BattlePostContainer battle={this.props.battle}
+                                     battleId={this.props.battleId}/>
             </div>
             
         )

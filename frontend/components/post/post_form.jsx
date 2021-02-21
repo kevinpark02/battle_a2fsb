@@ -39,6 +39,7 @@ class PostForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.createPost(this.state)
+            .then(() => this.props.fetchBattle(this.state.battle_id))
     }
 
     render(){
