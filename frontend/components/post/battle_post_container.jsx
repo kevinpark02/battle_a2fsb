@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
-import { BattlePost } from "./battle_post";
+import  BattlePost  from "./battle_post";
 
-const mapStateToProps = (state) => ({
-    
-});
+const mapStateToProps = (state) => {
+    return({
+        posts: Object.values(state.entities.posts)
+    })
+}
 
 const mapDispatchToProps = dispatch => ({
     

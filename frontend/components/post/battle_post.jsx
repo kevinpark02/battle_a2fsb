@@ -6,8 +6,15 @@ class BattlePost extends React.Component {
     }
 
     render() {
+        const posts = this.props.posts
         return(
-            <h1>This will be a post</h1>
+            <ul>
+                {posts.map(post => {
+                    return(
+                        post.body
+                    )
+                })}
+            </ul>
         )
     }
 }

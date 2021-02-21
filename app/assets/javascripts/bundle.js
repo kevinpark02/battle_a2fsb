@@ -1164,7 +1164,10 @@ var BattlePost = /*#__PURE__*/function (_React$Component) {
   _createClass(BattlePost, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "This will be a post");
+      var posts = this.props.posts;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, posts.map(function (post) {
+        return post.body;
+      }));
     }
   }]);
 
@@ -1192,14 +1195,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  return {
+    posts: Object.values(state.entities.posts)
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {};
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, null)(_battle_post__WEBPACK_IMPORTED_MODULE_1__.BattlePost));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, null)(_battle_post__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
