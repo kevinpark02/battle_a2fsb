@@ -3,12 +3,16 @@ import {
     REMOVE_POST
 } from "../actions/post_actions";
 
+import {
+    RECEIVE_BATTLE
+} from "../actions/battle_actions";
+
 const postReducer = (state = {}, action) => {
     Object.freeze(state);
     let nextState = Object.assign({}, state);
 
     switch (action.type) {
-        case RECEIVE_POST:
+        case RECEIVE_BATTLE:
             if (action.battle.posts === undefined) {
                 return {}
             } else {

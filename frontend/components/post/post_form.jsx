@@ -37,7 +37,8 @@ class PostForm extends React.Component {
     }
 
     handleSubmit(e) {
-
+        e.preventDefault();
+        this.props.createPost(this.state)
     }
 
     render(){
@@ -79,6 +80,7 @@ class PostForm extends React.Component {
                         })}
                     </ul>
                     <p>Total Points Earned: {Object.values(this.state.points_earned).reduce((a, b) => a + b, 0)}</p>
+                    <input type="submit" value ="Post!"/>
                 </form>
             </div>
         )

@@ -1,5 +1,6 @@
 import React from 'react';
-import PostFormContainer from "../../components/post/create_post_container"
+import PostFormContainer from "../../components/post/create_post_container";
+import BattlePostContainer from "../../components/post/battle_post_container"
 
 class BattleShow extends React.Component {
     constructor(props) {
@@ -24,15 +25,16 @@ class BattleShow extends React.Component {
         return(
             <div className="battle-show-container">
                 <h1>{this.props.battle.name}</h1>
-                {Object.keys(this.props.battle.score_board).map(team => {
+                {Object.keys(this.props.battle.score_board).map((team, idx) => {
                     return(
-                        <div>
+                        <div key={idx}>
                             {team}: {this.props.battle.score_board[team]}
                         </div>
                     )
                 })}
                 <PostFormContainer battle={this.props.battle}
                                    />
+                <BattlePostContainer />
             </div>
             
         )
